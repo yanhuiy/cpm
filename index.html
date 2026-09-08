@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全国算力中心建设 · 一张图</title>
+<script src="echarts.min.js"></script>
+<script src="china_geo.js"></script>
+<script src="cities_geo.js"></script>
+<script src="data.js"></script>
+<style>
+  :root{
+    --bg:#0a0e1a; --card:#11172b; --card-border:#1f2a45;
+    --accent:#00d4ff; --text:#dce8ff; --muted:#8fa8c8;
+    --red:#ff5c5c; --cyan:#00d4ff; --orange:#ffb020; --purple:#8f7bff;
+    --built:#7be07b; --plan:#ffb020;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:radial-gradient(1200px 600px at 20% -10%, #14203f 0%, var(--bg) 55%);
+    color:var(--text);font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    line-height:1.55;min-height:100vh;padding:24px 16px 60px;
+  }
+  .wrap{max-width:1400px;margin:0 auto;}
+  header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
+  h1{font-size:26px;font-weight:700;letter-spacing:1px;} h1 .dot{color:var(--accent);}
+  .sub{color:var(--muted);font-size:13px;margin-top:6px;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .badge{border:1px solid var(--card-border);background:rgba(17,23,43,.7);color:var(--muted);font-size:12px;padding:6px 12px;border-radius:20px;white-space:nowrap;}
+  .badge.new{border-color:var(--orange);color:var(--orange);}
+
+  /* 区域标签条（全国 + 各省） */
+  .region-strip{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:4px;}
+  .region-strip::-webkit-scrollbar{height:6px;}
+  .region-strip::-webkit-scrollbar-thumb{background:#2a3a5f;border-radius:3px;}
+  .region-pill{border:1px solid var(--card-border);background:transparent;color:var(--muted);padding:6px 16px;border-radius:20px;cursor:pointer;font-size:13px;white-space:nowrap;flex:0 0 auto;transition:.15s;}
+  .region-pill:hover{color:var(--text);border-color:#33456f;}
+  .region-pill.active{background:var(--accent);border-color:var(--accent);color:#051018;font-weight:600;}
+
+  /* 内容 Tabs */
+  .content-tabs{display:flex;gap:0;margin:0 0 18px;border-bottom:1px solid #1c2740;}
+  .content-tab{border:none;background:transparent;color:var(--muted);padding:10px 4px 12px;margin-right:26px;cursor:pointer;font-size:16px;font-weight:700;position:relative;transition:.15s;}
+  .content-tab:hover{color:var(--text);}
+  .content-tab.active{color:var(--accent);}
+  .content-tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+
+  .sec-title{font-size:17px;font-weight:700;margin:28px 0 14px;display:flex;align-items:center;gap:10px;}
+  .sec-title::before{content:"";width:4px;height:18px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+
+  .grid{display:grid;gap:16px;}
+  .kpi{grid-template-columns:repeat(5,1fr);}
+  @media(max-width:1100px){.kpi{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:760px){.kpi{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.35);}
+  .kpi .num{display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:24px;font-weight:800;line-height:1.1;} .kpi .num em{font-style:normal;font-size:13px;color:var(--accent);margin-left:3px;} .kpi .num .n-q{white-space:nowrap;} .kpi .num .n-v{font-size:17px;font-weight:700;line-height:1.25;white-space:nowrap;}
+  .kpi .lab{color:var(--muted);font-size:12px;margin-top:8px;}
+  .kpi .sub2{color:#7d92b8;font-size:12px;margin-top:3px;}
+  .kpi.hl .num{color:var(--accent);text-shadow:0 0 18px rgba(0,212,255,.45);}
+  .kpi.built .num{color:var(--built);} .kpi.plan .num{color:var(--plan);}
+  .kpi.hpc .num{color:var(--red);} .kpi.idc .num{color:var(--orange);} .kpi.cloud .num{color:var(--purple);}
+
+  .monthly-grid{grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.monthly-grid{grid-template-columns:1fr;}}
+  .monthly-list{max-height:180px;overflow-y:auto;margin-top:6px;}
+  .monthly-item{padding:8px 10px;border-left:2px solid var(--orange);margin-bottom:8px;background:rgba(255,176,32,.05);border-radius:4px;}
+  .monthly-item .m-title{font-size:13px;color:#eaf2ff;font-weight:600;}
+  .monthly-item .m-meta{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .monthly-empty{color:#5a6270;font-size:12.5px;padding:10px 0;}
+
+  /* 工具栏 / 筛选器（两行排列） */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;}
+  .toolbar .lbl{color:var(--muted);font-size:12px;align-self:center;}
+  .filter-bar{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+  .filter-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .filter-row .lbl{color:var(--muted);font-size:12px;align-self:center;min-width:34px;}
+  .pill{border:1px solid var(--card-border);background:transparent;color:var(--muted);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:.15s;}
+  .pill:hover{color:var(--text);border-color:#33456f;}
+  .pill.active{background:var(--accent);border-color:var(--accent);color:#051018;font-weight:600;}
+  .pill.back{background:rgba(255,92,92,.12);border-color:var(--red);color:var(--red);font-weight:600;}
+
+  .map-card{padding:8px;}
+  .map-layout{display:flex;gap:12px;align-items:stretch;}
+  #map{flex:1 1 auto;height:640px;min-width:0;}
+  .detail-panel{flex:0 0 330px;width:330px;background:#0d1424;border:1px solid var(--card-border);border-radius:12px;padding:18px;overflow-y:auto;height:640px;}
+  @media(max-width:900px){
+    .map-layout{flex-direction:column;}
+    #map{width:100%;height:480px;}
+    .detail-panel{width:100%;flex:0 0 auto;height:320px;}
+  }
+  .detail-panel .d-empty{color:var(--muted);font-size:13px;line-height:1.9;}
+  .detail-panel .d-empty b{color:var(--text);}
+  .d-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+  .d-meta{font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .d-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .tpill{font-size:12px;padding:2px 8px;border-radius:10px;}
+  .stage{font-size:12px;padding:2px 10px;border-radius:10px;background:transparent;}
+  .d-scale{font-size:15px;color:var(--accent);font-weight:700;margin-bottom:10px;line-height:1.5;}
+  .d-intro{font-size:13px;color:#b9c8e6;line-height:1.7;margin-bottom:12px;}
+  .d-src{font-size:12px;color:var(--muted);}
+  .d-src a{color:var(--accent);text-decoration:none;word-break:break-all;}
+  .d-src a:hover{text-decoration:underline;}
+  .d-est{font-size:11px;color:var(--orange);margin-top:8px;}
+  .d-ov-grid{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0;}
+  .d-ov{flex:1 1 46%;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.14);border-radius:8px;padding:8px 10px;}
+  .d-ov .k{font-size:11px;color:var(--muted);}
+  .d-ov .v{font-size:15px;font-weight:700;color:#eaf2ff;margin-top:2px;}
+  .d-hint{margin-top:14px;padding-top:12px;border-top:1px dashed #2a3a5f;font-size:11.5px;color:#7d92b8;line-height:1.9;}
+  .d-hint b{color:var(--accent);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:14px;padding:6px 12px 12px;color:var(--muted);font-size:12px;align-items:center;}
+  .legend .item{display:flex;align-items:center;gap:6px;} .legend .sw{width:12px;height:12px;border-radius:50%;display:inline-block;}
+  .legend .sw.sq{border-radius:3px;} .legend .sw.hollow{background:transparent !important;border:2px solid;}
+
+  .charts{grid-template-columns:1fr 1fr 1.4fr;}
+  @media(max-width:1000px){.charts{grid-template-columns:1fr 1fr;}}
+  .chart{width:100%;height:340px;} .chart h4{font-size:14px;margin-bottom:4px;} .chart .note{color:var(--muted);font-size:11.5px;margin:-4px 0 4px;}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+  .tab{border:1px solid var(--card-border);background:transparent;color:var(--muted);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:.15s;}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#051018;font-weight:600;}
+  .flabel{color:var(--muted);font-size:12px;align-self:center;margin-right:2px;}
+  .table-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:1000px;}
+  th,td{padding:11px 10px;border-bottom:1px solid #1c2740;text-align:left;vertical-align:top;}
+  th{color:var(--muted);font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;user-select:none;}
+  td{color:#cfe3ff;} td .intro{color:#8fa8c8;font-size:12px;} td .src{font-size:12px;font-size:12px;}
+  td a{color:var(--accent);text-decoration:none;} td a:hover{text-decoration:underline;}
+  .est-flag{color:var(--orange);font-size:11px;margin-left:4px;}
+
+  .policy-item{padding:14px 16px;border:1px solid var(--card-border);border-radius:12px;margin-bottom:12px;background:rgba(17,23,43,.6);}
+  .policy-item .p-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .policy-item .p-title{font-size:15px;font-weight:700;color:#eaf2ff;flex:1 1 auto;}
+  .policy-item .p-meta{font-size:12px;color:var(--muted);margin-bottom:8px;}
+  .policy-item .p-content{font-size:13px;color:#b9c8e6;line-height:1.7;}
+  .lv{font-size:11px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .lv.nation{background:rgba(255,176,32,.15);color:var(--orange);}
+  .lv.prov{background:rgba(0,212,255,.15);color:var(--accent);}
+  .lv.city{background:rgba(143,123,255,.15);color:var(--purple);}
+
+  footer{color:#5a6270;font-size:12px;margin-top:36px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1><span id="viewTitle">全国</span>算力中心建设<span class="dot">·</span>一张图</h1>
+      <div class="sub" id="subTitle">全国 34 省级行政区 · 算力中心 / 智算昇腾份额 / AI 产业政策 一体化看板</div>
+    </div>
+    <div class="badges">
+      <span class="badge">数据版本 <b id="metaVer">-</b></span>
+      <span class="badge">更新 <b id="metaDate">-</b></span>
+      <span class="badge new">本月新增 <b id="metaNew">0</b></span>
+    </div>
+  </header>
+
+  <!-- 区域标签：全国 + 各省 -->
+  <div class="region-strip" id="regionStrip"></div>
+
+  <!-- 内容 Tabs -->
+  <div class="content-tabs">
+    <button class="content-tab active" id="tabBuild" onclick="switchContent('build')">算力中心建设情况</button>
+    <button class="content-tab" id="tabPolicy" onclick="switchContent('policy')">新闻政策</button>
+  </div>
+
+  <!-- ============ 算力中心建设情况 ============ -->
+  <div id="viewBuild">
+
+  <!-- KPI 总览 -->
+  <div class="grid kpi">
+    <div class="card kpi hl"><div class="num" id="kpiTotal">0<em>个</em></div><div class="lab">算力中心总数</div><div class="sub2" id="kpiTotalSub">-</div></div>
+    <div class="card kpi built" style="color:var(--cyan)"><div class="num" id="kpiAi">0<em>P</em></div><div class="lab">智算中心 · AI算力</div><div class="sub2" id="kpiAiSub">-</div></div>
+    <div class="card kpi hpc" style="color:var(--red)"><div class="num" id="kpiHpc">0<em>PFlops</em></div><div class="lab">超算中心 · 超算算力</div><div class="sub2" id="kpiHpcSub">-</div></div>
+    <div class="card kpi idc" style="color:var(--orange)"><div class="num" id="kpiIdc">0<em>架</em></div><div class="lab">运营商 IDC · 机架</div><div class="sub2" id="kpiIdcSub">-</div></div>
+    <div class="card kpi cloud" style="color:var(--purple)"><div class="num" id="kpiCloud">0<em>个</em></div><div class="lab">通用·云数据中心</div><div class="sub2" id="kpiCloudSub">-</div></div>
+  </div>
+
+  <!-- 近 1 月新上线算力中心 -->
+  <div class="sec-title" id="monthlyTitle">全国 · 近 1 月新上线算力中心</div>
+  <div class="card">
+    <div class="note" style="color:var(--muted);font-size:11.5px;margin-bottom:4px;">依据公开报道时间判定，后续月度刷新时据此标注「本月新增」</div>
+    <div class="monthly-list" id="monthlyProjects"></div>
+  </div>
+
+  <!-- 地图 -->
+  <div class="sec-title">算力地图 · 全国看省 / 点击省份下钻</div>
+  <div class="card map-card">
+    <div class="filter-bar">
+      <div class="filter-row"><span class="lbl">类型：</span><span id="typeTabs" class="tabs" style="margin:0;"></span></div>
+      <div class="filter-row"><span class="lbl">阶段：</span><span id="stageTabs" class="tabs" style="margin:0;"></span></div>
+    </div>
+    <div class="map-layout">
+      <div id="map"></div>
+      <div class="detail-panel" id="detailPanel"></div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <!-- 图表 -->
+  <div class="sec-title">结构与份额分析</div>
+  <div class="grid charts">
+    <div class="card"><h4>算力中心类型构成</h4>
+      <div class="note">口径：按已建成项目数量</div><div id="pieType" class="chart"></div></div>
+    <div class="card"><h4>智算中心芯片厂商算力份额</h4>
+      <div class="note">口径：按已建成智算中心 AI 算力(P)加权</div><div id="pieVendor" class="chart"></div></div>
+    <div class="card"><h4 id="barTitle">各省 AI 算力排名（P）</h4>
+      <div class="note" id="barNote">口径：已建成且公布 AI 算力(P)的智算中心</div><div id="bar" class="chart"></div></div>
+  </div>
+
+  <!-- 项目明细（仅省视图） -->
+  <div id="tableSection" style="display:none;">
+    <div class="sec-title">项目明细（含简介与出处）</div>
+    <div class="filter-bar">
+      <div class="filter-row"><span class="lbl">类型：</span><span id="typeTabs2" class="tabs" style="margin:0 0 8px;"></span></div>
+      <div class="filter-row"><span class="lbl">阶段：</span><span id="stageTabs2" class="tabs" style="margin:0;"></span></div>
+    </div>
+    <div class="card">
+      <div class="table-wrap"><table id="tbl">
+        <thead><tr>
+          <th data-k="name">项目名称</th>
+          <th data-k="city">地市 / 区县</th>
+          <th data-k="type">类型</th>
+          <th data-k="stage">阶段</th>
+          <th data-k="scaleText" class="num">算力规模</th>
+          <th>简介</th>
+          <th>出处</th>
+        </tr></thead>
+        <tbody></tbody></table></div>
+    </div>
+  </div>
+  </div><!-- /viewBuild -->
+
+  <!-- ============ 新闻政策 ============ -->
+  <div id="viewPolicy" style="display:none;">
+    <div class="sec-title" id="monthlyPolicyTitle">全国 · 近 1 月新发布 AI 产业政策</div>
+    <div class="card">
+      <div class="note" style="color:var(--muted);font-size:11.5px;margin-bottom:4px;">含国家部委与各省市最新政策</div>
+      <div class="monthly-list" id="monthlyPolicies"></div>
+    </div>
+    <div class="sec-title" id="policyTitle">人工智能产业政策 · 国家部委</div>
+    <div id="policyBox"></div>
+  </div>
+
+  <footer>
+    数据来源：公开资料整理（政府文件 / 官方报道 / 招标公告），数据覆盖 <span id="footRange">-</span>。
+    标注「[预估]」的规模为公开渠道无确切数字时的估算值，仅供参考，请以官方口径为准。
+    本页数据层独立于展示（data.js），已预留后端定时爬取 / AI 检索刷新机制，可平滑切换为实时数据源。
+  </footer>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var isNation = function(){ return curProvince === null; };
+var MUNI = ['北京','天津','上海','重庆'];
+function provFull(s){ var m=window.PROVINCES.find(function(p){return p.s===s;}); return m?m.full:null; }
+function provShort(full){ var m=window.PROVINCES.find(function(p){return p.full===full;}); return m?m.s:null; }
+function group(stage){ return stage==='已建成' ? '已建成' : '在建及规划'; }
+function projectsIn(prov){ return prov ? window.PROJECTS.filter(function(p){return p.province===prov;}) : window.PROJECTS; }
+function visibleProjects(prov){
+  return projectsIn(prov).filter(function(p){
+    return (curType==='全部' || p.type===curType) && (curStage==='全部' || group(p.stage)===curStage);
+  });
+}
+// 图表专用：固定"已建成"口径（只随区域 + 类型筛选，不受阶段筛选影响）
+function builtProjects(){
+  return projectsIn(curProvince).filter(function(p){
+    return p.stage==='已建成' && (curType==='全部' || p.type===curType);
+  });
+}
+function cityCountMap(list, prov){
+  var m={}; var isMuni = prov && MUNI.indexOf(prov)>=0;
+  list.forEach(function(p){
+    var key = isMuni ? (p.district.split('·')[0].split('/')[0]) : p.city;
+    m[key]=(m[key]||0)+1;
+  });
+  return m;
+}
+function cityFill(c){
+  if(c===0 || !c) return '#12182b';
+  if(c<=2) return '#1c3d6b';
+  if(c<=5) return '#2a6ca1';
+  return '#00d4ff';
+}
+function fmtP(v){
+  if(v==null) return '0';
+  if(v>=10000) return (v/10000).toFixed(v%10000?1:0)+'万P';
+  return v+'P';
+}
+function fmtHpc(v){
+  if(v==null) return '0';
+  if(v>=10000) return (v/10000).toFixed(v%10000?1:0)+'万PFlops';
+  return v+'PFlops';
+}
+function fmtRacks(v){
+  if(v==null) return '0';
+  if(v>=10000) return (v/10000).toFixed(v%10000?1:0)+'万架';
+  return v+'架';
+}
+function isNew(announced){ return announced && window.DATA_META && announced >= window.DATA_META.monthlyNewCutoff; }
+function estFlag(rec){ return rec.estimated ? '<span class="est-flag">[预估]</span>' : ''; }
+
+/* ================= 状态 ================= */
+var curProvince = null;   // null=全国视图
+var curType = '全部';      // 地图筛选 · 类型
+var curStage = '已建成';   // 地图筛选 · 阶段（默认口径：已建成）
+var tblType = '全部';      // 表格筛选 · 类型（独立，不影响图表）
+var tblStage = '已建成';   // 表格筛选 · 阶段（独立，不影响图表）
+var curTab = 'build';     // build=算力中心建设情况 | policy=新闻政策
+
+/* ================= 区域标签 / 内容 Tabs ================= */
+function renderRegionStrip(){
+  var el = document.getElementById('regionStrip');
+  if(!el) return;
+  var html = '<button class="region-pill'+(isNation()?' active':'')+'" data-p="">全国</button>';
+  html += window.PROVINCES.map(function(p){
+    return '<button class="region-pill'+(curProvince===p.s?' active':'')+'" data-p="'+p.s+'">'+p.s+'</button>';
+  }).join('');
+  el.innerHTML = html;
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      if(b.dataset.p){ switchToProvince(b.dataset.p); }
+      else { switchToNation(); }
+    };
+  });
+  var act = el.querySelector('button.active');
+  if(act && act.scrollIntoView){ act.scrollIntoView({inline:'center', block:'nearest'}); }
+}
+function resizeCharts(){
+  ['pieType','pieVendor','bar'].forEach(function(id){
+    var dom = document.getElementById(id);
+    if(dom){ var inst = echarts.getInstanceByDom(dom); if(inst) inst.resize(); }
+  });
+}
+function switchContent(tab){
+  curTab = tab;
+  document.getElementById('viewBuild').style.display = (tab==='build') ? 'block' : 'none';
+  document.getElementById('viewPolicy').style.display = (tab==='policy') ? 'block' : 'none';
+  document.getElementById('tabBuild').className = 'content-tab' + (tab==='build' ? ' active' : '');
+  document.getElementById('tabPolicy').className = 'content-tab' + (tab==='policy' ? ' active' : '');
+  if(tab==='build'){ setTimeout(function(){ if(mapChart) mapChart.resize(); resizeCharts(); }, 30); }
+}
+
+/* ================= KPI ================= */
+function aggregate(list){
+  var r = { total:list.length, built:0, plan:0,
+            ai:0, aiBuilt:0, hpc:0, racks:0,
+            byType:{}, aiCenterCount:0, hpcCount:0, idcCount:0, cloudCount:0 };
+  list.forEach(function(p){
+    if(group(p.stage)==='已建成') r.built++; else r.plan++;
+    var t=p.type;
+    r.byType[t]=(r.byType[t]||0)+1;
+    if(t==='智算中心'){ r.aiCenterCount++; if(p.aiP!=null){ r.ai+=p.aiP; if(p.stage==='已建成') r.aiBuilt+=p.aiP; } }
+    if(t==='超算中心'){ r.hpcCount++; if(p.hpcP!=null) r.hpc+=p.hpcP; }
+    if(t==='运营商IDC'){ r.idcCount++; if(p.racks!=null) r.racks+=p.racks; }
+    if(t==='通用·云') r.cloudCount++;
+  });
+  return r;
+}
+function renderKpi(){
+  // KPI 主口径=已建成（随地图类型筛选，不随任何阶段筛选）；副行补充在建/规划数量
+  var list = projectsIn(curProvince).filter(function(p){ return curType==='全部' || p.type===curType; });
+  var builtList = list.filter(function(p){ return p.stage==='已建成'; });
+  var planList  = list.filter(function(p){ return p.stage!=='已建成'; });
+  var ab = aggregate(builtList);
+  var ap = aggregate(planList);
+
+  document.getElementById('kpiTotal').innerHTML = '<span class="n-q">'+ab.total+'<em>个</em></span>';
+  document.getElementById('kpiTotalSub').textContent = '在建/规划 '+ap.total+' 个';
+  document.getElementById('kpiAi').innerHTML = '<span class="n-q">'+ab.aiCenterCount+'<em>个</em></span><span class="n-v">'+fmtP(ab.ai)+'</span>';
+  document.getElementById('kpiAiSub').textContent = '在建/规划 '+ap.aiCenterCount+' 个 · '+fmtP(ap.ai);
+  document.getElementById('kpiHpc').innerHTML = '<span class="n-q">'+ab.hpcCount+'<em>个</em></span><span class="n-v">'+fmtHpc(ab.hpc)+'</span>';
+  document.getElementById('kpiHpcSub').textContent = '在建/规划 '+ap.hpcCount+' 个 · '+fmtHpc(ap.hpc);
+  document.getElementById('kpiIdc').innerHTML = '<span class="n-q">'+ab.idcCount+'<em>个</em></span><span class="n-v">'+fmtRacks(ab.racks)+'</span>';
+  document.getElementById('kpiIdcSub').textContent = '在建/规划 '+ap.idcCount+' 个 · '+fmtRacks(ap.racks);
+  document.getElementById('kpiCloud').innerHTML = '<span class="n-q">'+ab.cloudCount+'<em>个</em></span>';
+  document.getElementById('kpiCloudSub').textContent = '在建/规划 '+ap.cloudCount+' 个';
+}
+
+/* ================= 近 1 月新增 ================= */
+function renderMonthlyNew(){
+  var cutoff = window.DATA_META.monthlyNewCutoff;
+  var scope = isNation() ? '全国' : curProvince;
+  var newP = projectsIn(curProvince).filter(function(p){ return p.announced && p.announced>=cutoff; });
+  var elP = document.getElementById('monthlyProjects');
+  document.getElementById('monthlyTitle').textContent = scope + ' · 近 1 月新上线算力中心';
+  if(newP.length===0){
+    elP.innerHTML = '<div class="monthly-empty">'+scope+' 近 1 月暂无新增算力中心记录（数据刷新后自动更新）</div>';
+  } else {
+    elP.innerHTML = newP.map(function(p){
+      var src = p.source ? '<div class="d-src" style="margin-top:4px;"><a href="'+p.source+'" target="_blank">'+(p.sourceName||'查看出处')+' ↗</a></div>' : '';
+      return '<div class="monthly-item"><div class="m-title">'+p.name+'</div>'+
+        '<div class="m-meta">'+p.province+' · '+p.city+' · '+p.type+' · '+p.stage+' · '+p.scaleText+'</div>'+src+'</div>';
+    }).join('');
+  }
+  var newPol = (isNation() ? window.POLICIES : window.POLICIES.filter(function(p){return p.region===curProvince;}))
+    .filter(function(p){ return p.date && p.date>=cutoff; });
+  var elPo = document.getElementById('monthlyPolicies');
+  document.getElementById('monthlyPolicyTitle').textContent = scope + ' · 近 1 月新发布 AI 产业政策';
+  if(newPol.length===0){
+    elPo.innerHTML = '<div class="monthly-empty">'+scope+' 近 1 月暂无新政策记录</div>';
+  } else {
+    elPo.innerHTML = newPol.map(function(p){
+      var src = p.link ? '<div class="d-src" style="margin-top:4px;"><a href="'+p.link+'" target="_blank">查看原文 ↗</a></div>' : '';
+      return '<div class="monthly-item"><div class="m-title">'+p.title+'</div>'+
+        '<div class="m-meta">'+p.publisher+' · '+p.date+'</div>'+src+'</div>';
+    }).join('');
+  }
+  var totalNew = newP.length + newPol.length;
+  document.getElementById('metaNew').textContent = totalNew;
+  document.getElementById('metaVer').textContent = window.DATA_META.version;
+  document.getElementById('metaDate').textContent = window.DATA_META.updatedAt;
+  document.getElementById('footRange').textContent = window.DATA_META.dataRange;
+}
+
+/* ================= 工具栏 ================= */
+var TYPE_LIST = window.TYPE_LIST;
+var STAGE_OPTS = [
+  {v:'已建成',     label:'已建成'},
+  {v:'在建及规划', label:'在建/规划'}
+];
+function renderTypeTabs(id, val, onChange){
+  var tt = document.getElementById(id); if(!tt) return; tt.innerHTML='';
+  ['全部'].concat(TYPE_LIST).forEach(function(t){
+    var b=document.createElement('button');
+    b.className='pill'+(t===val?' active':'');
+    b.textContent=t;
+    b.onclick=function(){ onChange(t); };
+    tt.appendChild(b);
+  });
+}
+function renderStageTabs(id, val, onChange){
+  var st = document.getElementById(id); if(!st) return; st.innerHTML='';
+  STAGE_OPTS.forEach(function(o){
+    var b=document.createElement('button');
+    b.className='pill'+(o.v===val?' active':'');
+    b.textContent=o.label;
+    b.onclick=function(){ onChange(o.v); };
+    st.appendChild(b);
+  });
+}
+// 地图类型：联动 KPI / 图例 / 地图 / 详情 / 图表（图表固定已建成口径，随类型变化）
+function onMapTypeChange(t){
+  if(curType===t) return;
+  curType=t; renderToolbar();
+  renderKpi(); renderLegend(); updateMap(); showDetailEmpty(); renderPies(); renderBar();
+}
+// 地图阶段：仅联动地图与右侧详情（KPI、图表固定已建成口径，不随阶段刷新）
+function onMapStageChange(s){
+  if(curStage===s) return;
+  curStage=s; renderToolbar();
+  updateMap(); showDetailEmpty();
+}
+// 表格筛选：独立状态，仅刷新明细表（不刷新图表/地图/KPI）
+function onTblTypeChange(t){
+  if(tblType===t) return;
+  tblType=t; renderToolbar(); renderTable();
+}
+function onTblStageChange(s){
+  if(tblStage===s) return;
+  tblStage=s; renderToolbar(); renderTable();
+}
+function renderToolbar(){
+  renderTypeTabs('typeTabs', curType, onMapTypeChange);
+  renderStageTabs('stageTabs', curStage, onMapStageChange);
+  renderTypeTabs('typeTabs2', tblType, onTblTypeChange);
+  renderStageTabs('stageTabs2', tblStage, onTblStageChange);
+  document.getElementById('viewTitle').textContent = isNation()?'全国':curProvince;
+  document.getElementById('subTitle').textContent = isNation()
+    ? '全国 34 省级行政区 · 算力中心 / 智算昇腾份额 / AI 产业政策 一体化看板'
+    : curProvince+'省 · 各地市算力中心建设情况（点击气泡/地市查看详情）';
+}
+
+/* ================= 地图 ================= */
+var mapChart = null;
+var ringCache = {};
+function ringImage(color){
+  if(ringCache[color]) return ringCache[color];
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="'+color+'" stroke-width="7"/></svg>';
+  ringCache[color] = 'image://data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  return ringCache[color];
+}
+
+function currentGeoName(){
+  return isNation() ? 'china' : 'prov_'+curProvince;
+}
+function ensureMaps(){
+  if(!echarts.getMap('china')) echarts.registerMap('china', window.CHINA_GEO);
+  if(!isNation()){
+    var meta = window.PROVINCES.find(function(p){return p.s===curProvince;});
+    if(meta && window.CITY_GEO[meta.full] && !echarts.getMap('prov_'+curProvince)){
+      echarts.registerMap('prov_'+curProvince, window.CITY_GEO[meta.full]);
+    }
+  }
+}
+
+function buildMapOption(){
+  var list = visibleProjects(curProvince);
+  var mapName = currentGeoName();
+  var regionNames = [];
+  var counts = {};
+  var regions = [];
+
+  if(isNation()){
+    // 全国：省份着色
+    var allProv = window.CHINA_GEO.features.map(function(f){return f.properties.name;});
+    var stats = {}; list.forEach(function(p){ stats[p.province]=(stats[p.province]||0)+1; });
+    regionNames = allProv;
+    regions = allProv.map(function(full){
+      var s = provShort(full);
+      return { name:full, itemStyle:{ areaColor: cityFill((s&&stats[s])||0) } };
+    });
+  } else {
+    // 省：地市着色
+    var meta = window.PROVINCES.find(function(p){return p.s===curProvince;});
+    var geo = meta ? window.CITY_GEO[meta.full] : null;
+    if(geo && geo.features){
+      var allCity = geo.features.map(function(f){return f.properties.name;});
+      counts = cityCountMap(list, curProvince);
+      regionNames = allCity;
+      regions = allCity.map(function(n){ return { name:n, itemStyle:{ areaColor: cityFill(counts[n]||0) } }; });
+    }
+  }
+
+  var scatterData = list.map(function(p){
+    var built = p.stage==='已建成';
+    var c = window.TYPE_COLOR[p.type] || '#8f7bff';
+    return {
+      name:p.name, value:[p.coord[0],p.coord[1],window.SIZE_BY_LEVEL[Math.max(0,(p.level||1)-1)]],
+      province:p.province, city:p.city, district:p.district, type:p.type, stage:p.stage,
+      scaleText:p.scaleText, intro:p.intro, source:p.source, sourceName:p.sourceName,
+      vendor:p.vendor, estimated:p.estimated, year:p.year,
+      symbol: built ? 'circle' : ringImage('#ffb020'),
+      itemStyle: built ? { color:c, borderColor:'rgba(255,255,255,.85)', borderWidth:1, shadowBlur:14, shadowColor:'rgba(0,0,0,.45)' } : { color:'#ffb020' }
+    };
+  });
+
+  var mapData = regionNames.map(function(n){
+    if(isNation()){ var s=provShort(n); return {name:n, value:(s? (list.filter(function(p){return p.province===s;}).length) :0)}; }
+    return {name:n, value: counts[n]||0};
+  });
+
+  return {
+    tooltip:{
+      trigger:'item', enterable:true, confine:true,
+      backgroundColor:'#111830', borderColor:'rgba(0,212,255,.35)', borderWidth:1,
+      textStyle:{color:'#cfe3ff',fontSize:12},
+      formatter:function(params){
+        if(params.componentType==='geo'){
+          var label = isNation()? '省份' : '地市';
+          var cnt = (params.data!=null && params.data.value!=null) ? params.data.value : (counts[params.name]||0);
+          return '<b>'+params.name+'</b><br/>'+label+'项目数：'+cnt+' 个'+(isNation()?'（点击下钻）':'');
+        }
+        if(params.seriesType==='map'){ return '<b>'+params.name+'</b><br/>项目数：'+(params.data?params.data.value:0)+' 个'+(isNation()?'（点击下钻）':''); }
+        var d=params.data;
+        var st = d.stage==='已建成' ? '<span style="color:#7be07b">已建成</span>' : '<span style="color:#ffb020">在建/规划</span>';
+        var src = d.source ? '<br/><a style="color:#00d4ff" href="'+d.source+'" target="_blank">出处：'+d.sourceName+' ↗</a>' : '<br/><span style="color:#667">出处：待补充</span>';
+        var est = d.estimated ? '<br/><span style="color:#ffb020">[预估数据]</span>' : '';
+        return '<b>'+d.name+'</b><br/>'+d.province+' '+d.city+' · '+d.district
+          +'<br/>类型：<span style="color:'+(window.TYPE_COLOR[d.type]||'#8f7bff')+'">'+d.type+'</span>　阶段：'+st
+          +(d.vendor?'　芯片：'+d.vendor:'')
+          +'<br/>算力规模：'+d.scaleText
+          +'<br/><span style="color:#8fa8c8">'+d.intro+'</span>'+src+est;
+      }
+    },
+    geo:{
+      map:mapName, roam:true, zoom:1.0,
+      label:{show:true,color:'#eaf2ff',fontSize:isNation()?11:10},
+      itemStyle:{areaColor:'#12182b',borderColor:'#3a4a6b',borderWidth:1},
+      regions: regions,
+      emphasis:{label:{color:'#fff',fontWeight:'bold'},itemStyle:{areaColor:'#274a6f'}}
+    },
+    series:[
+      {name:'区域项目数',type:'map',map:mapName,geoIndex:0,z:0,
+       data: mapData,
+       itemStyle:{areaColor:'rgba(0,0,0,0)',borderColor:'rgba(0,0,0,0)'},
+       label:{show:false},emphasis:{itemStyle:{areaColor:'rgba(0,0,0,0)'},label:{show:false}}},
+      {name:'项目',type:'scatter',coordinateSystem:'geo',geoIndex:0,data:scatterData,
+       z:2, symbolSize:function(v){return v[2];}, emphasis:{scale:1.6}}
+    ]
+  };
+}
+
+function renderMap(){
+  ensureMaps();
+  if(!mapChart) mapChart = echarts.init(document.getElementById('map'));
+  mapChart.setOption(buildMapOption(), true);
+  mapChart.off('click');
+  mapChart.on('click', function(params){
+    if(params.componentType==='series' && params.seriesName==='项目' && params.data){
+      showProjectDetail(params.data);
+      return;
+    }
+    if(params.name){
+      if(isNation()){
+        var s = provShort(params.name);
+        if(s && !window.CITY_GEO[params.name]){ /* 直辖市等无地市数据省份也允许下钻 */ }
+        if(s) switchToProvince(s);
+      } else {
+        showCityDetail(params.name);
+      }
+    }
+  });
+  showDetailEmpty();
+}
+function updateMap(){ if(mapChart) mapChart.setOption(buildMapOption(), true); }
+
+/* ================= 详情面板 ================= */
+function showDetailEmpty(){
+  var el=document.getElementById('detailPanel');
+  // 地图右侧随阶段筛选展示（默认已建成），不额外标注在建数量
+  var list = visibleProjects(curProvince);
+  var a = aggregate(list);
+  var isN = isNation();
+  var stageLabel = curStage==='已建成' ? '已建成' : '在建/规划';
+
+  // 覆盖范围（全国=省份数，省=地市数）
+  var areaCount;
+  if(isN){
+    var m={}; list.forEach(function(p){ m[p.province]=(m[p.province]||0)+1; });
+    areaCount = Object.keys(m).length;
+  } else {
+    areaCount = Object.keys(cityCountMap(list, curProvince)).length;
+  }
+
+  var title = (isN ? '全国整体情况' : (curProvince+'整体情况'))+' · '+stageLabel;
+  var areaLabel = isN ? '覆盖省份' : '覆盖地市';
+  var typeHtml = Object.keys(a.byType).map(function(t){
+    return '<span class="tpill" style="color:'+(window.TYPE_COLOR[t]||'#8f7bff')+';background:'+(window.TYPE_COLOR[t]||'#8f7bff')+'22">'+t+' '+a.byType[t]+'</span>';
+  }).join(' ');
+
+  var ov = '';
+  ov += '<div class="d-ov"><div class="k">'+areaLabel+'</div><div class="v">'+areaCount+' 个</div></div>';
+  ov += '<div class="d-ov"><div class="k">'+stageLabel+'算力中心</div><div class="v">'+a.total+' 个</div></div>';
+  ov += '<div class="d-ov"><div class="k">智算中心 · AI算力</div><div class="v">'+a.aiCenterCount+' 个<br>'+fmtP(a.ai)+'</div></div>';
+  ov += '<div class="d-ov"><div class="k">超算中心 · 超算算力</div><div class="v">'+a.hpcCount+' 个<br>'+fmtHpc(a.hpc)+'</div></div>';
+  ov += '<div class="d-ov"><div class="k">运营商IDC · 机架</div><div class="v">'+a.idcCount+' 个<br>'+fmtRacks(a.racks)+'</div></div>';
+  ov += '<div class="d-ov"><div class="k">通用·云数据中心</div><div class="v">'+a.cloudCount+' 个</div></div>';
+  if(!isN){
+    ov += '<div class="d-ov" style="flex:1 1 100%;"><div class="k">类型构成</div><div class="v" style="font-size:13px;line-height:1.9;">'+typeHtml+'</div></div>';
+  }
+
+  var hint = isN
+    ? '<b>图注</b><br/>· 图块颜色：项目数越多越亮（无 / 1–2 / 3–5 / 6+）<br/>· 点击<b>省份区域</b> → 下钻查看该省各地市<br/>· 点击<b>项目气泡</b> → 查看名称/类型/芯片/规模/简介/出处'
+    : '<b>图注</b><br/>· 图块颜色：地市项目数越多越亮<br/>· 点击<b>地市区域</b> → 查看该地市整体概况<br/>· 点击<b>项目气泡</b> → 查看项目详情';
+
+  el.innerHTML =
+    '<div class="d-title">'+title+'</div>'
+    +'<div class="d-meta">'+window.DATA_META.updatedAt+' 更新 · 数据覆盖 '+window.DATA_META.dataRange+' · 口径 '+stageLabel+'</div>'
+    +'<div class="d-ov-grid">'+ov+'</div>'
+    +'<div class="d-hint">'+hint+'</div>';
+}
+function showProjectDetail(p){
+  var el=document.getElementById('detailPanel');
+  var isBuilt = p.stage==='已建成';
+  var stColor = isBuilt ? '#7be07b' : '#ffb020';
+  var src = p.source
+    ? '<a href="'+p.source+'" target="_blank">'+p.sourceName+' ↗</a>'
+    : '<span style="color:#667">出处待补充</span>';
+  el.innerHTML =
+    '<div class="d-title">'+p.name+'</div>'
+    +'<div class="d-meta">'+p.province+' · '+p.city+' · '+p.district+'</div>'
+    +'<div class="d-tags">'
+      +'<span class="tpill" style="color:'+(window.TYPE_COLOR[p.type]||'#8f7bff')+';background:'+(window.TYPE_COLOR[p.type]||'#8f7bff')+'22">'+p.type+'</span>'
+      +'<span class="stage" style="border:1px solid '+stColor+';color:'+stColor+'">'+p.stage+'</span>'
+      +(p.vendor?'<span class="tpill" style="color:'+(window.VENDOR_COLOR[p.vendor]||'#ccc')+';background:'+(window.VENDOR_COLOR[p.vendor]||'#ccc')+'22">'+(p.type==='智算中心'?'芯片·':'')+p.vendor+'</span>':'')
+    +'</div>'
+    +'<div class="d-scale">算力规模：'+p.scaleText+'</div>'
+    +'<div class="d-intro">'+p.intro+'</div>'
+    +'<div class="d-src">出处：'+src+'</div>'
+    +(p.estimated?'<div class="d-est">⚠ 该规模为预估数据，请以官方口径为准</div>':'');
+}
+function showCityDetail(cityName){
+  var list = projectsIn(curProvince).filter(function(p){
+    if(MUNI.indexOf(curProvince)>=0) return (p.district.split('·')[0].split('/')[0])===cityName;
+    return p.city===cityName;
+  });
+  if(!list.length){ showDetailEmpty(); return; }
+  var a = aggregate(list);
+  var el=document.getElementById('detailPanel');
+  var typeHtml = Object.keys(a.byType).map(function(t){
+    return '<span class="tpill" style="color:'+(window.TYPE_COLOR[t]||'#8f7bff')+';background:'+(window.TYPE_COLOR[t]||'#8f7bff')+'22">'+t+' ×'+a.byType[t]+'</span>';
+  }).join('');
+  var aiHtml = a.aiBuilt>0 ? '<div class="d-scale">已建成智算 AI 算力合计：'+fmtP(a.aiBuilt)+'</div>' : '';
+  el.innerHTML =
+    '<div class="d-title">'+cityName+'</div>'
+    +'<div class="d-meta">'+(curProvince||'')+' · 地市算力建设概况</div>'
+    +'<div class="d-tags">'
+      +'<span class="stage" style="border:1px solid #7be07b;color:#7be07b">已建成 '+a.built+' 个</span>'
+      +'<span class="stage" style="border:1px solid #ffb020;color:#ffb020">在建/规划 '+a.plan+' 个</span>'
+    +'</div>'
+    +'<div class="d-scale">收录项目 '+a.total+' 个</div>'
+    + aiHtml
+    +'<div class="d-intro" style="margin-bottom:6px;"><b>类型构成：</b></div>'
+    +'<div class="d-tags">'+typeHtml+'</div>';
+}
+
+/* ================= 图表 ================= */
+function renderPies(){
+  // 图表口径统一为"已建成"（builtProjects 已固定阶段，不随阶段筛选变化）
+  var P = builtProjects();
+  ['pieType','pieVendor'].forEach(function(id){
+    var inst = echarts.getInstanceByDom(document.getElementById(id)); if(inst) inst.dispose();
+  });
+
+  // 饼图1：类型数量
+  var typeCount = {}; P.forEach(function(p){ typeCount[p.type]=(typeCount[p.type]||0)+1; });
+  var pieType = echarts.init(document.getElementById('pieType'));
+  pieType.setOption({
+    tooltip:{trigger:'item',backgroundColor:'#111830',borderColor:'rgba(0,212,255,.35)',textStyle:{color:'#cfe3ff',fontSize:12}},
+    legend:{bottom:0,textStyle:{color:'#8fa8c8',fontSize:11},itemWidth:10,itemHeight:10},
+    series:[{type:'pie',radius:['42%','68%'],center:['50%','44%'],
+      data:Object.keys(typeCount).map(function(t){return {name:t,value:typeCount[t],itemStyle:{color:window.TYPE_COLOR[t]}};}),
+      label:{color:'#cfe3ff',fontSize:11,formatter:'{b}\n{c}'},emphasis:{scale:true}}]
+  });
+
+  // 饼图2：智算 vendor 份额（按 AI 算力加权）
+  var vendorSum = {};
+  P.filter(function(p){return p.type==='智算中心' && p.aiP!=null;}).forEach(function(p){
+    var v = p.vendor || '其他';
+    vendorSum[v]=(vendorSum[v]||0)+p.aiP;
+  });
+  var vArr = Object.keys(vendorSum).map(function(v){return {name:v,value:vendorSum[v],itemStyle:{color:window.VENDOR_COLOR[v]||'#5a6270'}};})
+    .sort(function(a,b){return b.value-a.value;});
+  var noData = vArr.length===0;
+  var pieVendor = echarts.init(document.getElementById('pieVendor'));
+  pieVendor.setOption({
+    tooltip:{trigger:'item',backgroundColor:'#111830',borderColor:'rgba(0,212,255,.35)',textStyle:{color:'#cfe3ff',fontSize:12},
+      formatter:function(p){ return p.name+'：'+fmtP(p.value); }},
+    legend:{bottom:0,textStyle:{color:'#8fa8c8',fontSize:11},itemWidth:10,itemHeight:10},
+    series:[{type:'pie',radius:['42%','68%'],center:['50%','44%'],
+      data: noData?[{name:'暂无数据',value:1,itemStyle:{color:'#2a3450'}}] : vArr,
+      label:{color:'#cfe3ff',fontSize:11,formatter:function(p){return noData?'{b}': '{b}\n'+fmtP(p.value);}},emphasis:{scale:true}}]
+  });
+}
+
+function renderBar(){
+  var inst = echarts.getInstanceByDom(document.getElementById('bar')); if(inst) inst.dispose();
+  var bar = echarts.init(document.getElementById('bar'));
+  var list = builtProjects();
+  var ranks = [];
+  if(isNation()){
+    // 各省 AI 算力排名
+    var m={}; list.forEach(function(p){
+      if(p.aiP!=null) m[p.province]=(m[p.province]||0)+p.aiP;
+    });
+    ranks = Object.keys(m).map(function(k){return {name:k,value:m[k]};}).sort(function(a,b){return b.value-a.value;});
+    document.getElementById('barTitle').textContent='各省 AI 算力排名（P）';
+    document.getElementById('barNote').textContent='口径：已建成且公布 AI 算力(P)的智算中心，按省份汇总';
+  } else {
+    // 各地市 AI 算力排名
+    var cm={}; list.forEach(function(p){
+      if(p.aiP!=null) cm[p.city]=(cm[p.city]||0)+p.aiP;
+    });
+    ranks = Object.keys(cm).map(function(k){return {name:k,value:cm[k]};}).sort(function(a,b){return b.value-a.value;});
+    document.getElementById('barTitle').textContent=curProvince+'各地市 AI 算力排名（P）';
+    document.getElementById('barNote').textContent='口径：已建成且公布 AI 算力(P)的智算中心，按地市汇总';
+  }
+  ranks = ranks.slice(0,15);
+  bar.setOption({
+    grid:{left:8,right:30,top:8,bottom:8,containLabel:true},
+    xAxis:{type:'value',axisLabel:{color:'#8fa8c8'},splitLine:{lineStyle:{color:'#1c2740'}}},
+    yAxis:{type:'category',data:ranks.map(function(d){return d.name;}),axisLabel:{color:'#cfe3ff'},axisLine:{lineStyle:{color:'#2a3a5f'}}},
+    tooltip:{trigger:'axis',backgroundColor:'#111830',borderColor:'rgba(0,212,255,.35)',textStyle:{color:'#cfe3ff',fontSize:12},
+      formatter:function(ps){return ps[0].name+'：'+fmtP(ps[0].value);}},
+    series:[{type:'bar',data:ranks.map(function(d){return d.value;}),barWidth:'55%',
+      itemStyle:{color:function(p){return p.dataIndex===0?'#00d4ff':'#2b6faa';},borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',color:'#cfe3ff',fontWeight:'bold',formatter:function(p){return fmtP(p.value);}}}]
+  });
+}
+
+/* ================= 政策 ================= */
+function renderPolicies(){
+  var list = isNation()
+    ? window.POLICIES.filter(function(p){return p.level==='国家级';})
+    : window.POLICIES.filter(function(p){return p.region===curProvince;});
+  document.getElementById('policyTitle').textContent = isNation()
+    ? '人工智能产业政策 · 国家部委'
+    : curProvince+' 人工智能产业政策 · 省/市';
+  var box = document.getElementById('policyBox');
+  if(list.length===0){
+    box.innerHTML='<div class="card"><span style="color:#5a6270;font-size:13px;">暂无该区域政策记录（持续补充中）</span></div>';
+    return;
+  }
+  var lvClass = {国家级:'nation',省级:'prov',市级:'city'};
+  box.innerHTML = list.map(function(p){
+    return '<div class="policy-item">'
+      +'<div class="p-head"><span class="lv '+(lvClass[p.level]||'city')+'">'+p.level+'</span>'
+      +'<span class="p-title">'+p.title+'</span></div>'
+      +'<div class="p-meta">'+p.publisher+' · '+p.date+'　'+(p.category?('['+p.category+']'):'')+'</div>'
+      +'<div class="p-content">'+p.content+'</div>'
+      +(p.link?'<div class="d-src" style="margin-top:6px;"><a href="'+p.link+'" target="_blank">查看原文 ↗</a></div>':'')
+      +'</div>';
+  }).join('');
+}
+
+/* ================= 表格（省视图） ================= */
+var sortKey='city', sortAsc=false;
+function renderTable(){
+  var section = document.getElementById('tableSection');
+  if(isNation()){ section.style.display='none'; return; }
+  section.style.display='block';
+  // 表格使用独立的 tblType/tblStage 筛选（不影响地图与图表）
+  var rows = projectsIn(curProvince).filter(function(p){
+    return (tblType==='全部' || p.type===tblType) && (tblStage==='全部' || group(p.stage)===tblStage);
+  }).slice().sort(function(a,b){
+    var x=a[sortKey], y=b[sortKey];
+    if(typeof x==='number' && typeof y==='number') return sortAsc? x-y : y-x;
+    x=String(x==null?'':x); y=String(y==null?'':y);
+    return sortAsc? x.localeCompare(y,'zh') : y.localeCompare(x,'zh');
+  });
+  var tb=document.querySelector('#tbl tbody'); tb.innerHTML='';
+  rows.forEach(function(p){
+    var isBuilt = p.stage==='已建成';
+    var src = p.source
+      ? '<a href="'+p.source+'" target="_blank">'+p.sourceName+' ↗</a>'
+      : '<span style="color:#667">出处待补充</span>';
+    var tr=document.createElement('tr');
+    tr.innerHTML =
+      '<td><b>'+p.name+'</b></td>'
+      +'<td>'+p.city+'<br><span class="intro">'+p.district+'</span></td>'
+      +'<td><span class="tpill" style="color:'+(window.TYPE_COLOR[p.type]||'#8f7bff')+';background:'+(window.TYPE_COLOR[p.type]||'#8f7bff')+'22">'+p.type+'</span></td>'
+      +'<td><span class="stage" style="border:1px solid '+(isBuilt?'#7be07b':'#ffb020')+';color:'+(isBuilt?'#7be07b':'#ffb020')+'">'+p.stage+'</span></td>'
+      +'<td class="num">'+p.scaleText+estFlag(p)+(p.vendor?'<br><span class="intro">芯片:'+p.vendor+'</span>':'')+'</td>'
+      +'<td class="intro">'+p.intro+'</td>'
+      +'<td class="src">'+src+'</td>';
+    tb.appendChild(tr);
+  });
+}
+function bindSort(){
+  document.querySelectorAll('#tbl th[data-k]').forEach(function(th){
+    th.onclick=function(){
+      var k=th.dataset.k;
+      if(sortKey===k){sortAsc=!sortAsc;} else {sortKey=k;sortAsc=false;}
+      document.querySelectorAll('#tbl th .arr').forEach(function(a){a.remove();});
+      var arr=document.createElement('span');arr.className='arr';arr.style.color='#00d4ff';arr.textContent=sortAsc?'▲':'▼';th.appendChild(arr);
+      renderTable();
+    };
+  });
+}
+
+/* ================= 图例 ================= */
+function renderLegend(){
+  var el=document.getElementById('legend');
+  var typeLegend = window.TYPE_LIST.map(function(t){
+    return '<span class="item"><span class="sw" style="background:'+window.TYPE_COLOR[t]+'"></span>'+t+'</span>';
+  }).join('');
+  el.innerHTML =
+    '<span>'+(isNation()?'省份项目数':'地市项目数')+'：</span>'
+    +'<span class="item"><span class="sw sq" style="background:#12182b"></span>无</span>'
+    +'<span class="item"><span class="sw sq" style="background:#1c3d6b"></span>1–2</span>'
+    +'<span class="item"><span class="sw sq" style="background:#2a6ca1"></span>3–5</span>'
+    +'<span class="item"><span class="sw sq" style="background:#00d4ff"></span>6+</span>'
+    +'<span style="margin-left:8px;">类型：</span>'+typeLegend
+    +'<span style="margin-left:8px;">阶段：</span>'
+    +'<span class="item"><span class="sw" style="background:#7be07b"></span>已建成(实心)</span>'
+    +'<span class="item"><span class="sw hollow" style="border-color:#ffb020"></span>在建/规划(空心·黄)</span>';
+}
+
+/* ================= 切换 ================= */
+function switchToProvince(prov){
+  curProvince = prov; curType='全部'; curStage='已建成'; tblType='全部'; tblStage='已建成';
+  renderRegionStrip(); renderToolbar(); renderKpi(); renderLegend(); renderMap(); showDetailEmpty();
+  renderMonthlyNew(); renderPies(); renderBar(); renderPolicies(); renderTable();
+}
+function switchToNation(){
+  curProvince = null; curType='全部'; curStage='已建成'; tblType='全部'; tblStage='已建成';
+  renderRegionStrip(); renderToolbar(); renderKpi(); renderLegend(); renderMap(); showDetailEmpty();
+  renderMonthlyNew(); renderPies(); renderBar(); renderPolicies(); renderTable();
+}
+
+/* ================= 初始化 ================= */
+window.addEventListener('DOMContentLoaded', function(){
+  renderRegionStrip(); renderToolbar(); renderKpi(); renderMonthlyNew(); renderLegend();
+  renderMap(); renderPies(); renderBar(); renderPolicies(); renderTable(); bindSort();
+});
+window.addEventListener('resize', function(){
+  if(curTab==='build'){ if(mapChart) mapChart.resize(); resizeCharts(); }
+});
+</script>
+</body>
+</html>
