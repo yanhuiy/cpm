@@ -94,7 +94,8 @@ process.exit(fail > 0 ? 1 : 0);
 def check_frontend():
     print('[前端语法] 检查各 JS 文件')
     r = subprocess.run(['node', '-e', _JS_CHECK], cwd=BASE,
-                       capture_output=True, text=True)
+                       capture_output=True, text=True,
+                       encoding='utf-8', errors='replace')
     if r.stdout:
         print(r.stdout, end='')
     if r.stderr:
