@@ -241,7 +241,7 @@ window.PROVINCES = [
 /* =========================================================================
  * 算力中心项目数据
  * 字段说明：
- *   id         稳定主键（增量刷新匹配用），格式：{adcode}-{类型缩写}-{三位序号}
+ *   id         稳定主键（增量刷新匹配用），格式：{adcode}-{三位序号}（不含类型，类型见 type 字段）
  *   createdAt  首次收录时间(YYYY-MM-DD)
  *   updatedAt  最近一次变更时间(YYYY-MM-DD)，无变更为 null
  *   name       项目名称
@@ -266,7 +266,7 @@ window.PROVINCES = [
  * ========================================================================= */
 window.PROJECTS = [
   {
-    "id": "610000-hpc-001",
+    "id": "610000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算西安中心",
@@ -293,7 +293,7 @@ window.PROJECTS = [
     "sourceName": "国家超算西安中心官网"
   },
   {
-    "id": "610000-aic-001",
+    "id": "610000-002",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "西安未来人工智能计算中心",
@@ -320,7 +320,7 @@ window.PROJECTS = [
     "sourceName": "西安市雁塔区数据局"
   },
   {
-    "id": "610000-aic-002",
+    "id": "610000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "沣东新城智能计算中心(沣东智算中心)",
@@ -347,7 +347,7 @@ window.PROJECTS = [
     "sourceName": "西安市数据局"
   },
   {
-    "id": "610000-idc-001",
+    "id": "610000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国联通西北智云数据中心(西安)",
@@ -374,7 +374,7 @@ window.PROJECTS = [
     "sourceName": "中国新闻网"
   },
   {
-    "id": "610000-idc-002",
+    "id": "610000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(陕西西咸新区)数据中心",
@@ -401,7 +401,7 @@ window.PROJECTS = [
     "sourceName": "证券时报"
   },
   {
-    "id": "610000-idc-003",
+    "id": "610000-006",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国电信云计算(陕西)基地",
@@ -428,7 +428,7 @@ window.PROJECTS = [
     "sourceName": "烽火云集"
   },
   {
-    "id": "610000-hpc-002",
+    "id": "610000-007",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "陕西空天超算中心",
@@ -455,7 +455,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-clu-001",
+    "id": "610000-008",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家电网西安数据中心",
@@ -482,7 +482,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-clu-002",
+    "id": "610000-009",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "西安浐灞腾讯云数据中心",
@@ -509,7 +509,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-clu-003",
+    "id": "610000-010",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "百度智能云天互数据中心",
@@ -536,7 +536,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-aic-003",
+    "id": "610000-011",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "安康智算中心(陕西智算云谷)",
@@ -563,7 +563,7 @@ window.PROJECTS = [
     "sourceName": "新浪财经"
   },
   {
-    "id": "610000-aic-004",
+    "id": "610000-012",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "咸阳高新图灵人工智能算力中心",
@@ -590,7 +590,7 @@ window.PROJECTS = [
     "sourceName": "澎湃·咸阳高新区"
   },
   {
-    "id": "610000-aic-005",
+    "id": "610000-013",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "咸阳低碳工业智能算力中心",
@@ -617,7 +617,7 @@ window.PROJECTS = [
     "sourceName": "咸阳日报"
   },
   {
-    "id": "610000-aic-006",
+    "id": "610000-014",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "延安人工智能算力中心(无锡·延安)",
@@ -644,7 +644,7 @@ window.PROJECTS = [
     "sourceName": "延安市政府工作报告"
   },
   {
-    "id": "610000-clu-004",
+    "id": "610000-015",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "延安华为云计算数据中心",
@@ -671,7 +671,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-clu-005",
+    "id": "610000-016",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宝鸡数据大厦暨宝鸡数据中心",
@@ -698,7 +698,7 @@ window.PROJECTS = [
     "sourceName": "陕西省政府/陕西日报"
   },
   {
-    "id": "610000-aic-007",
+    "id": "610000-017",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宝鸡渭滨区数字智算产业园",
@@ -725,7 +725,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "610000-clu-006",
+    "id": "610000-018",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "渭南华山云数据中心",
@@ -752,7 +752,7 @@ window.PROJECTS = [
     "sourceName": "36氪"
   },
   {
-    "id": "610000-clu-007",
+    "id": "610000-019",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "商洛秦岭云计算大数据中心",
@@ -779,7 +779,7 @@ window.PROJECTS = [
     "sourceName": "人民邮电报"
   },
   {
-    "id": "610000-aic-008",
+    "id": "610000-020",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "汉中移动智慧城市算力中心",
@@ -806,7 +806,7 @@ window.PROJECTS = [
     "sourceName": "华商报"
   },
   {
-    "id": "610000-aic-009",
+    "id": "610000-021",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "鹏银长安智算中心",
@@ -833,7 +833,7 @@ window.PROJECTS = [
     "sourceName": "中国IDC圈"
   },
   {
-    "id": "610000-aic-010",
+    "id": "610000-022",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "安康智算产业园(二期)",
@@ -860,7 +860,7 @@ window.PROJECTS = [
     "sourceName": "中国IDC圈"
   },
   {
-    "id": "610000-aic-011",
+    "id": "610000-023",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "移动铜川智算中心",
@@ -887,7 +887,7 @@ window.PROJECTS = [
     "sourceName": "铜川市政府工作报告"
   },
   {
-    "id": "610000-aic-012",
+    "id": "610000-024",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "同泽时轮低轨卫星通信算力中心",
@@ -914,7 +914,7 @@ window.PROJECTS = [
     "sourceName": "盯工程(项目备案)"
   },
   {
-    "id": "610000-clu-008",
+    "id": "610000-025",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "陕西电信信息枢纽园区",
@@ -941,34 +941,7 @@ window.PROJECTS = [
     "sourceName": "西安市雁塔区数据局"
   },
   {
-    "id": "610000-clu-009",
-    "createdAt": "2026-09-07",
-    "updatedAt": null,
-    "name": "延安云计算数据中心二期",
-    "province": "陕西",
-    "city": "延安市",
-    "district": "宝塔区·新区",
-    "type": "通用·云",
-    "stage": "规划",
-    "scaleText": "规模待确认",
-    "level": 2,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2025-02",
-    "estimated": true,
-    "coord": [
-      109.28,
-      36.45
-    ],
-    "intro": "延安市推进的算力基础设施扩容项目之一，列入延安市政府工作报告加快建设内容。",
-    "source": "https://www.shaanxi.gov.cn/zfxxgk/zfgzbg/sqszfgzbg/202502/t20250228_3454745_wap.html",
-    "sourceName": "延安市政府工作报告"
-  },
-  {
-    "id": "610000-clu-010",
+    "id": "610000-027",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "陕西国家算力互联互通区域节点",
@@ -995,7 +968,7 @@ window.PROJECTS = [
     "sourceName": "陕西省工信厅"
   },
   {
-    "id": "640000-idc-001",
+    "id": "640000-001",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "中卫数据中心集群",
@@ -1022,7 +995,7 @@ window.PROJECTS = [
     "sourceName": "经济日报"
   },
   {
-    "id": "640000-aic-001",
+    "id": "640000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "腾讯智算中心(中卫)",
@@ -1049,7 +1022,7 @@ window.PROJECTS = [
     "sourceName": "中卫日报"
   },
   {
-    "id": "640000-aic-002",
+    "id": "640000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国电信中卫算力枢纽",
@@ -1076,7 +1049,7 @@ window.PROJECTS = [
     "sourceName": "人民邮电报"
   },
   {
-    "id": "640000-idc-002",
+    "id": "640000-004",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "宁夏联通中卫云数据中心",
@@ -1103,7 +1076,7 @@ window.PROJECTS = [
     "sourceName": "新浪科技"
   },
   {
-    "id": "640000-aic-003",
+    "id": "640000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "百度智算中心(中卫)",
@@ -1130,7 +1103,7 @@ window.PROJECTS = [
     "sourceName": "中卫日报"
   },
   {
-    "id": "640000-idc-003",
+    "id": "640000-006",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "美利云中卫数据中心",
@@ -1157,7 +1130,7 @@ window.PROJECTS = [
     "sourceName": "经济日报"
   },
   {
-    "id": "640000-idc-004",
+    "id": "640000-007",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国广电宁夏中卫数据中心",
@@ -1184,7 +1157,7 @@ window.PROJECTS = [
     "sourceName": "中国IDC圈"
   },
   {
-    "id": "640000-idc-005",
+    "id": "640000-008",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中交(中卫)云数据中心",
@@ -1211,7 +1184,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-aic-004",
+    "id": "640000-009",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "中联零碳智算(云基地)产业园",
@@ -1238,7 +1211,7 @@ window.PROJECTS = [
     "sourceName": "经济日报"
   },
   {
-    "id": "640000-aic-005",
+    "id": "640000-010",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "中金数据零碳算力产业基地",
@@ -1265,7 +1238,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-aic-006",
+    "id": "640000-011",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "中卫九川算力科创园",
@@ -1292,7 +1265,7 @@ window.PROJECTS = [
     "sourceName": "九川数科官网"
   },
   {
-    "id": "640000-aic-007",
+    "id": "640000-012",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "晶科科技1GW算力中心",
@@ -1319,7 +1292,7 @@ window.PROJECTS = [
     "sourceName": "新浪财经"
   },
   {
-    "id": "640000-aic-008",
+    "id": "640000-013",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "秦淮/浩云等超大型智算中心(签约)",
@@ -1346,7 +1319,7 @@ window.PROJECTS = [
     "sourceName": "中卫市政府工作报告"
   },
   {
-    "id": "640000-aic-009",
+    "id": "640000-014",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "闽宁绿电数智应用产业园",
@@ -1373,7 +1346,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-clu-001",
+    "id": "640000-015",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "银川创投集团数据机房(3#4#)",
@@ -1400,7 +1373,7 @@ window.PROJECTS = [
     "sourceName": "银川日报"
   },
   {
-    "id": "640000-aic-010",
+    "id": "640000-016",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "银川图灵小镇",
@@ -1427,7 +1400,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-clu-002",
+    "id": "640000-017",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "银川算力小镇智算平台",
@@ -1454,7 +1427,7 @@ window.PROJECTS = [
     "sourceName": "弱电行业网"
   },
   {
-    "id": "640000-aic-011",
+    "id": "640000-018",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "宁夏移动银川智算中心",
@@ -1481,7 +1454,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-clu-003",
+    "id": "640000-019",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "宁夏电信算力小镇",
@@ -1508,7 +1481,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-aic-012",
+    "id": "640000-020",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "天云智算光电一体化算力中心",
@@ -1535,7 +1508,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-aic-013",
+    "id": "640000-021",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中电算力银川智算中心",
@@ -1562,7 +1535,7 @@ window.PROJECTS = [
     "sourceName": "宁夏日报"
   },
   {
-    "id": "640000-aic-014",
+    "id": "640000-022",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "灵武智慧算力科创谷",
@@ -1589,7 +1562,7 @@ window.PROJECTS = [
     "sourceName": "银川日报"
   },
   {
-    "id": "640000-aic-015",
+    "id": "640000-023",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "银川算电一体化Token超级工厂",
@@ -1616,7 +1589,7 @@ window.PROJECTS = [
     "sourceName": "银川日报"
   },
   {
-    "id": "320000-hpc-001",
+    "id": "320000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算无锡中心(神威·太湖之光)",
@@ -1643,7 +1616,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "120000-hpc-001",
+    "id": "120000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算天津中心(天河一号)",
@@ -1670,7 +1643,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-hpc-001",
+    "id": "440000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算广州中心(天河二号)",
@@ -1697,7 +1670,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-hpc-001",
+    "id": "370000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算济南中心(山河)",
@@ -1724,7 +1697,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "430000-hpc-001",
+    "id": "430000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算长沙中心(天河)",
@@ -1751,7 +1724,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-aic-001",
+    "id": "440000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "鹏城实验室(鹏城云脑)",
@@ -1778,7 +1751,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "420000-aic-001",
+    "id": "420000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "武汉人工智能计算中心",
@@ -1805,7 +1778,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "420000-hpc-001",
+    "id": "420000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "武汉超算中心",
@@ -1832,7 +1805,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "110000-aic-001",
+    "id": "110000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "北京昇腾人工智能计算中心",
@@ -1859,7 +1832,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "310000-aic-001",
+    "id": "310000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "商汤临港AIDC智算中心",
@@ -1886,7 +1859,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "310000-aic-002",
+    "id": "310000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "上海人工智能计算中心",
@@ -1913,7 +1886,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "330000-aic-001",
+    "id": "330000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "杭州之江实验室智算平台",
@@ -1940,7 +1913,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "340000-hpc-001",
+    "id": "340000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "合肥先进计算中心(类脑智能)",
@@ -1967,7 +1940,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "410000-hpc-001",
+    "id": "410000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "郑州(嵩山)超算中心",
@@ -1994,7 +1967,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-hpc-002",
+    "id": "370000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "青岛海洋超算中心",
@@ -2021,7 +1994,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-idc-001",
+    "id": "130000-001",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "张家口数据中心集群",
@@ -2048,7 +2021,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-idc-002",
+    "id": "130000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "阿里巴巴张北数据中心",
@@ -2075,7 +2048,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "150000-idc-001",
+    "id": "150000-001",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "华为云乌兰察布数据中心",
@@ -2102,34 +2075,34 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "150000-idc-002",
+    "id": "150000-002",
     "createdAt": "2026-09-07",
-    "updatedAt": null,
+    "updatedAt": "2026-09-08",
     "name": "中国移动呼和浩特数据中心",
     "province": "内蒙古",
     "city": "呼和浩特市",
-    "district": "和林格尔新区",
-    "type": "运营商IDC",
-    "stage": "已建成",
-    "scaleText": "规模约数十万机架级",
-    "level": 4,
+    "district": null,
+    "type": "智算中心",
+    "stage": "在建",
+    "scaleText": "超1万卡AI超节点，总投资33.5亿元",
+    "level": 1,
     "aiP": null,
     "hpcP": null,
-    "racks": 50000,
-    "vendor": null,
-    "year": 2017,
-    "announced": "2017-12",
+    "racks": null,
+    "vendor": "昇腾",
+    "year": 2026,
+    "announced": "2026-08",
     "estimated": true,
     "coord": [
       111.75,
       40.84
     ],
-    "intro": "中国移动在内蒙古建设的全国性超大规模数据中心，是东数西算内蒙古枢纽的重要组成。",
-    "source": "",
-    "sourceName": "出处待补充"
+    "intro": "中国移动呼和浩特数据中心部署超1万卡华为昇腾AI超节点，两期设备陆续就位。",
+    "source": "http://news.17173.com/content/08262026/190314735.shtml",
+    "sourceName": "17173"
   },
   {
-    "id": "520000-idc-001",
+    "id": "520000-001",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "贵安华为云数据中心",
@@ -2156,7 +2129,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "520000-idc-002",
+    "id": "520000-002",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "腾讯贵安七星数据中心",
@@ -2183,7 +2156,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "620000-idc-001",
+    "id": "620000-001",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "庆阳东数西算枢纽集群",
@@ -2210,7 +2183,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "510000-aic-001",
+    "id": "510000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "成都智算中心",
@@ -2237,7 +2210,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-idc-001",
+    "id": "440000-003",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "韶关数据中心集群",
@@ -2264,7 +2237,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "340000-idc-001",
+    "id": "340000-002",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "芜湖数据中心集群",
@@ -2291,7 +2264,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "620000-idc-002",
+    "id": "620000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "兰州新区大数据中心",
@@ -2318,7 +2291,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "630000-idc-001",
+    "id": "630000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "西宁大数据产业园",
@@ -2345,7 +2318,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "650000-idc-001",
+    "id": "650000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "乌鲁木齐云计算产业园",
@@ -2372,7 +2345,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "540000-idc-001",
+    "id": "540000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宁算科技拉萨数据中心",
@@ -2399,7 +2372,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "450000-idc-001",
+    "id": "450000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国—东盟(南宁)数据中心",
@@ -2426,7 +2399,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "460000-idc-001",
+    "id": "460000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "海口数据中心集群",
@@ -2453,7 +2426,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "530000-idc-001",
+    "id": "530000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "昆明数据中心产业园",
@@ -2480,7 +2453,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "350000-idc-001",
+    "id": "350000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "数字福建云计算中心",
@@ -2507,7 +2480,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "350000-aic-001",
+    "id": "350000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "厦门智算中心",
@@ -2534,7 +2507,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "360000-idc-001",
+    "id": "360000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "南昌大数据中心",
@@ -2561,7 +2534,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "140000-aic-001",
+    "id": "140000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "山西(太原)智算中心",
@@ -2588,7 +2561,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "210000-aic-001",
+    "id": "210000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "沈阳人工智能计算中心",
@@ -2615,7 +2588,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "220000-aic-001",
+    "id": "220000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "长春人工智能计算中心",
@@ -2642,7 +2615,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "230000-hpc-001",
+    "id": "230000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "哈尔滨超算中心",
@@ -2669,7 +2642,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "500000-idc-001",
+    "id": "500000-001",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "重庆两江云计算数据中心",
@@ -2696,7 +2669,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "110000-hpc-001",
+    "id": "110000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国科学院超级计算中心",
@@ -2723,7 +2696,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "110000-aic-002",
+    "id": "110000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "北京人工智能公共算力平台",
@@ -2750,7 +2723,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "110000-idc-001",
+    "id": "110000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "光环新网房山云计算基地",
@@ -2777,7 +2750,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "110000-idc-002",
+    "id": "110000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(北京)数据中心",
@@ -2804,7 +2777,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "120000-aic-001",
+    "id": "120000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "天津智能计算中心",
@@ -2831,7 +2804,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "120000-idc-001",
+    "id": "120000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "腾讯天津数据中心",
@@ -2858,7 +2831,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-idc-003",
+    "id": "130000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "润泽国际信息港(廊坊)",
@@ -2885,7 +2858,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "140000-idc-001",
+    "id": "140000-002",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "百度阳泉云计算中心",
@@ -2912,7 +2885,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-clu-001",
+    "id": "130000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "保定京东云数据中心",
@@ -2939,7 +2912,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-idc-004",
+    "id": "130000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "怀来秦淮数据中心集群",
@@ -2966,7 +2939,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "130000-aic-001",
+    "id": "130000-006",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "石家庄智算中心",
@@ -2993,7 +2966,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "140000-aic-002",
+    "id": "140000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "大同能源智算中心",
@@ -3020,7 +2993,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "140000-idc-002",
+    "id": "140000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动太原数据中心",
@@ -3047,7 +3020,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "150000-idc-003",
+    "id": "150000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国电信云计算内蒙古信息园",
@@ -3074,7 +3047,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "150000-idc-004",
+    "id": "150000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国联通呼和浩特云数据中心",
@@ -3101,7 +3074,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "150000-aic-001",
+    "id": "150000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "呼和浩特智算中心",
@@ -3128,7 +3101,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "210000-aic-002",
+    "id": "210000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "大连人工智能计算中心",
@@ -3155,7 +3128,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "210000-idc-001",
+    "id": "210000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(沈阳)数据中心",
@@ -3182,7 +3155,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "220000-hpc-001",
+    "id": "220000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "长春超算中心(吉大·科学计算)",
@@ -3209,7 +3182,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "230000-aic-001",
+    "id": "230000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "哈尔滨智算中心",
@@ -3236,7 +3209,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "230000-idc-001",
+    "id": "230000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(哈尔滨)数据中心",
@@ -3263,7 +3236,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "310000-hpc-001",
+    "id": "310000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "上海超级计算中心",
@@ -3290,7 +3263,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "310000-idc-001",
+    "id": "310000-004",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "阿里云(华东)数据中心",
@@ -3317,7 +3290,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "310000-idc-002",
+    "id": "310000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动上海临港数据中心",
@@ -3344,7 +3317,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "320000-hpc-002",
+    "id": "320000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算昆山中心",
@@ -3371,7 +3344,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "320000-aic-001",
+    "id": "320000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "南京智算中心(长三角)",
@@ -3398,7 +3371,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "320000-aic-002",
+    "id": "320000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "苏州智算中心",
@@ -3425,7 +3398,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "320000-idc-001",
+    "id": "320000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(南京)数据中心",
@@ -3452,7 +3425,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "330000-hpc-001",
+    "id": "330000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "乌镇超算(之江实验室)",
@@ -3479,7 +3452,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "330000-aic-002",
+    "id": "330000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "杭州人工智能计算中心",
@@ -3506,7 +3479,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "330000-idc-001",
+    "id": "330000-004",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "阿里云(杭州)数据中心",
@@ -3533,7 +3506,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "330000-aic-003",
+    "id": "330000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宁波智算中心",
@@ -3560,7 +3533,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "340000-aic-001",
+    "id": "340000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "合肥智算中心",
@@ -3587,7 +3560,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "340000-idc-002",
+    "id": "340000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国电信(安徽)合肥数据中心",
@@ -3614,7 +3587,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "340000-clu-001",
+    "id": "340000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宿州云计算数据中心",
@@ -3641,7 +3614,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "360000-aic-001",
+    "id": "360000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "南昌人工智能计算中心",
@@ -3668,7 +3641,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "360000-clu-001",
+    "id": "360000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "赣州大数据产业园",
@@ -3695,7 +3668,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-aic-001",
+    "id": "370000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "济南人工智能计算中心",
@@ -3722,7 +3695,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-aic-002",
+    "id": "370000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "青岛人工智能计算中心",
@@ -3749,7 +3722,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-idc-001",
+    "id": "370000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(济南)数据中心",
@@ -3776,7 +3749,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "370000-idc-002",
+    "id": "370000-006",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国联通青岛数据中心",
@@ -3803,7 +3776,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "410000-aic-001",
+    "id": "410000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中原人工智能计算中心",
@@ -3830,7 +3803,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "410000-idc-001",
+    "id": "410000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(郑州)云数据中心",
@@ -3857,7 +3830,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "410000-aic-002",
+    "id": "410000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "洛阳智算中心",
@@ -3884,7 +3857,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "420000-aic-002",
+    "id": "420000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "宜昌智算中心",
@@ -3911,7 +3884,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "420000-idc-001",
+    "id": "420000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国电信(武汉)数据中心",
@@ -3938,7 +3911,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "430000-aic-001",
+    "id": "430000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "长沙人工智能计算中心",
@@ -3965,7 +3938,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "430000-aic-002",
+    "id": "430000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "株洲智算中心",
@@ -3992,7 +3965,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "430000-idc-001",
+    "id": "430000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(长沙)数据中心",
@@ -4019,7 +3992,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-hpc-002",
+    "id": "440000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算深圳中心",
@@ -4046,7 +4019,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-aic-002",
+    "id": "440000-005",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "深圳智算中心",
@@ -4073,7 +4046,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-aic-003",
+    "id": "440000-006",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "广州智算中心",
@@ -4100,7 +4073,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-idc-002",
+    "id": "440000-007",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "腾讯清远数据中心",
@@ -4127,7 +4100,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-idc-003",
+    "id": "440000-008",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "阿里云(河源)数据中心",
@@ -4154,7 +4127,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "440000-idc-004",
+    "id": "440000-009",
     "createdAt": "2026-09-07",
     "updatedAt": "2026-09-08",
     "name": "华为(东莞)数据中心",
@@ -4181,7 +4154,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "450000-aic-001",
+    "id": "450000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "南宁人工智能计算中心",
@@ -4208,7 +4181,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "450000-idc-002",
+    "id": "450000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(广西南宁)数据中心",
@@ -4235,7 +4208,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "460000-aic-001",
+    "id": "460000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "海口智算中心",
@@ -4262,7 +4235,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "460000-hpc-001",
+    "id": "460000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "三亚超算中心(崖州湾)",
@@ -4289,7 +4262,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "500000-aic-001",
+    "id": "500000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "重庆人工智能计算中心",
@@ -4316,7 +4289,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "500000-idc-002",
+    "id": "500000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(重庆)数据中心",
@@ -4343,7 +4316,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "510000-hpc-001",
+    "id": "510000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "国家超级计算成都中心",
@@ -4370,7 +4343,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "510000-aic-002",
+    "id": "510000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "绵阳智算中心(科技城)",
@@ -4397,7 +4370,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "520000-aic-001",
+    "id": "520000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "贵阳智算中心",
@@ -4424,7 +4397,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "520000-idc-003",
+    "id": "520000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国联通(贵安)云数据中心",
@@ -4451,7 +4424,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "530000-aic-001",
+    "id": "530000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "昆明人工智能计算中心",
@@ -4478,7 +4451,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "540000-aic-001",
+    "id": "540000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "拉萨智算中心",
@@ -4505,7 +4478,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "620000-aic-001",
+    "id": "620000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "兰州人工智能计算中心",
@@ -4532,7 +4505,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "620000-idc-003",
+    "id": "620000-004",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "中国移动(兰州)数据中心",
@@ -4559,7 +4532,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "630000-aic-001",
+    "id": "630000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "西宁绿色算力中心",
@@ -4586,7 +4559,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "650000-aic-001",
+    "id": "650000-002",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "乌鲁木齐智算中心",
@@ -4613,7 +4586,7 @@ window.PROJECTS = [
     "sourceName": "出处待补充"
   },
   {
-    "id": "650000-clu-001",
+    "id": "650000-003",
     "createdAt": "2026-09-07",
     "updatedAt": null,
     "name": "喀什大数据中心",
@@ -4659,10 +4632,10 @@ window.PROJECTS = [
       125.42,
       43.82
     ],
-    "intro": "吉林省首家建成并投入常态化运营的大型算力中心，全栈自主可控，填补长春大规模高性能算力供给空白。",
+    "intro": "吉林省首家建成并投入常态化运营的大型算力中心，全栈自主可控，采用华为技术。",
     "source": "https://app.xinhuanet.com/news/article.html?articleId=20260901774affbf007847fb8d94ec6efc23def2",
-    "sourceName": "新华网客户端",
-    "id": "220000-aic-002",
+    "sourceName": "新华网",
+    "id": "220000-003",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4670,10 +4643,10 @@ window.PROJECTS = [
     "name": "新疆丝路慧图智算中心",
     "province": "新疆",
     "city": "喀什地区",
-    "district": "喀什市",
+    "district": "喀什空天信息产业园",
     "type": "智算中心",
     "stage": "已建成",
-    "scaleText": "总投资9.7亿元",
+    "scaleText": "总投资9.7亿元，重点承接AI推理业务",
     "level": 1,
     "aiP": null,
     "hpcP": null,
@@ -4686,10 +4659,10 @@ window.PROJECTS = [
       75.99,
       39.47
     ],
-    "intro": "填补新疆大型智能算力基础设施空白，重点承接AI推理业务。",
+    "intro": "新疆丝路慧图智算中心于2026年4月建成投运，填补新疆大型智能算力基础设施空白，承接AI推理业务。",
     "source": "https://www.stdaily.com/web/gdxw/2026-09/02/content_573849.html",
     "sourceName": "科技日报",
-    "id": "650000-aic-002",
+    "id": "650000-004",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4700,23 +4673,23 @@ window.PROJECTS = [
     "district": "廊坊开发区",
     "type": "智算中心",
     "stage": "在建",
-    "scaleText": "总投资218亿元，容纳11万张芯片，支撑10万PFLOPS",
-    "level": 5,
-    "aiP": 10000.0,
+    "scaleText": "一期总投资218亿元，总建筑面积22万平方米，容纳11万张先进芯片",
+    "level": 1,
+    "aiP": null,
     "hpcP": null,
     "racks": null,
     "vendor": "混合",
     "year": 2026,
     "announced": "2026-08",
-    "estimated": false,
+    "estimated": true,
     "coord": [
       116.7,
-      39.5
+      39.52
     ],
-    "intro": "润泽人工智能应用中心一期，可承载万亿级大模型训练。",
+    "intro": "润泽人工智能应用中心一期项目总投资218亿元，B1为智算中心，投用后容纳11万张先进芯片，承载万亿级大模型。",
     "source": "https://www.lf.gov.cn/Item/157133.aspx",
-    "sourceName": "廊坊市政府",
-    "id": "130000-aic-002",
+    "sourceName": "廊坊日报",
+    "id": "130000-007",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4743,7 +4716,7 @@ window.PROJECTS = [
     "intro": "万润在乌兰察布建设低碳智能算力基地，正在施工中。",
     "source": "https://news.pedaily.cn/202608/567735.shtml",
     "sourceName": "投资界",
-    "id": "150000-aic-002",
+    "id": "150000-006",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4770,7 +4743,7 @@ window.PROJECTS = [
     "intro": "快手在乌兰察布建设星河数据中心，目前处于前期施工阶段。",
     "source": "https://news.pedaily.cn/202608/567735.shtml",
     "sourceName": "投资界",
-    "id": "150000-clu-001",
+    "id": "150000-007",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4797,7 +4770,7 @@ window.PROJECTS = [
     "intro": "阿里巴巴浙江云计算数据中心临平新城项目完成竣工验收。",
     "source": "https://www.parkworld.net/post/8df0677748bd83a",
     "sourceName": "园区世界",
-    "id": "330000-clu-001",
+    "id": "330000-006",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4824,7 +4797,7 @@ window.PROJECTS = [
     "intro": "广西最高等级、最大规模的智算中心，一期已建成投运，获得CQC国标A级等认证。",
     "source": "https://www.guandian.cn/article/20260825/591382.html",
     "sourceName": "观点网",
-    "id": "450000-aic-002",
+    "id": "450000-004",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4851,7 +4824,7 @@ window.PROJECTS = [
     "intro": "2026年7月投运，仅用10个月建成，体现交付周期大幅压缩。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "650000-aic-003",
+    "id": "650000-005",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4878,7 +4851,7 @@ window.PROJECTS = [
     "intro": "2026年6月投运，采用机房楼+预制机电模块，整体工期约11个月。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "640000-clu-004",
+    "id": "640000-024",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4905,7 +4878,7 @@ window.PROJECTS = [
     "intro": "2026年6月投运，利用存量厂房改造，整体工期约10个月。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "220000-aic-003",
+    "id": "220000-004",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -4932,90 +4905,9 @@ window.PROJECTS = [
     "intro": "南疆首个智能绿色算力中心。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "650000-aic-004",
+    "id": "650000-006",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "广南云数算力中心",
-    "province": "云南",
-    "city": "文山壮族苗族自治州",
-    "district": "广南县",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "千P级",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": null,
-    "year": 2025,
-    "announced": "2025-08",
-    "estimated": true,
-    "coord": [
-      105.0,
-      24.0
-    ],
-    "intro": "云南首个千P级县域算力枢纽。",
-    "source": "https://eu.36kr.com/zh/p/3933058929671299",
-    "sourceName": "36氪",
-    "id": "530000-aic-002",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "DeepSeek乌兰察布智算中心",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "集宁区",
-    "type": "智算中心",
-    "stage": "规划",
-    "scaleText": "部署16万颗华为昇腾950DT芯片，GW级",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2027,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      113.1,
-      41.0
-    ],
-    "intro": "DeepSeek计划在乌兰察布建设超大型AI数据中心，部署16万颗华为昇腾950DT芯片，预计2027年起分批投用。",
-    "source": "https://www.worldjournal.com/wj/story/121347/9736327?zh-cn=",
-    "sourceName": "世界新闻网",
-    "id": "150000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "国家超算互联网郑州核心节点（全国产10万卡AI超集群）",
-    "province": "河南",
-    "city": "郑州市",
-    "district": "郑东新区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "10万卡国产AI超集群",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      113.6,
-      34.8
-    ],
-    "intro": "中国首个全国产10万卡AI超集群，已正式投用，主打科学计算与智能计算融合。",
-    "source": "https://global.hk01.com/%E5%8D%B3%E6%97%B6%E4%B8%AD%E5%9B%BD/60378280/%E4%B8%AD%E5%9B%BD%E9%A6%96%E4%B8%AA%E5%85%A8%E5%9B%BD%E4%BA%A710%E4%B8%87%E5%8D%A1ai%E8%B6%85%E9%9B%86%E7%BE%A4%E6%8A%95%E7%94%A8-%E7%AE%97%E5%8A%9B%E7%9B%B8%E5%BD%93%E5%85%A8%E4%BA%BA%E7%B1%BB%E8%AE%A1%E7%AE%97200%E5%B9%B4",
-    "sourceName": "香港01",
-    "id": "410000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
   },
   {
     "name": "中金数据中心（乌兰察布）",
@@ -5040,7 +4932,7 @@ window.PROJECTS = [
     "intro": "中金数据在乌兰察布的数据中心项目，一期部分投产，二期在建，计划明年整体投产。",
     "source": "https://news.pedaily.cn/202608/567735.shtml",
     "sourceName": "投资界",
-    "id": "150000-clu-002",
+    "id": "150000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5067,63 +4959,9 @@ window.PROJECTS = [
     "intro": "中联绿色智算中心四期项目在建，位于乌兰察布。",
     "source": "https://news.pedaily.cn/202608/567735.shtml",
     "sourceName": "投资界",
-    "id": "150000-aic-004",
+    "id": "150000-009",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "DeepSeek乌兰察布AI数据中心",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "察哈尔高新区",
-    "type": "智算中心",
-    "stage": "在建",
-    "scaleText": "规划1GW，部署16万颗华为昇腾950芯片",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      113.1,
-      40.99
-    ],
-    "intro": "DeepSeek计划在乌兰察布建设1GW大型AI数据中心，部署16万颗华为昇腾950芯片支撑大模型推理。",
-    "source": "https://www.worldjournal.com/wj/story/121347/9736327?zh-cn=",
-    "sourceName": "世界新闻网",
-    "id": "150000-aic-005",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "中国移动呼和浩特智算中心扩容工程",
-    "province": "内蒙古",
-    "city": "呼和浩特市",
-    "district": "呼和浩特",
-    "type": "智算中心",
-    "stage": "在建",
-    "scaleText": "超1万卡AI超节点，投资33.5亿元",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      111.7,
-      40.8
-    ],
-    "intro": "中国移动加码华为昇腾，超1万卡AI超节点落地呼和浩特。",
-    "source": "http://news.17173.com/content/08262026/190314735.shtml",
-    "sourceName": "17173",
-    "id": "150000-aic-006",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "贵安超算中心",
@@ -5133,24 +4971,24 @@ window.PROJECTS = [
     "type": "超算中心",
     "stage": "已建成",
     "scaleText": "每秒1.3亿亿次运算速度",
-    "level": 5,
+    "level": 1,
     "aiP": null,
-    "hpcP": 13000.0,
+    "hpcP": 1.3,
     "racks": null,
     "vendor": null,
     "year": 2026,
     "announced": "2026-08",
     "estimated": true,
     "coord": [
-      106.5,
+      106.6,
       26.4
     ],
-    "intro": "贵安超算中心以每秒1.3亿亿次运算速度昼夜运转，承接全国AI训练和影视渲染订单。",
+    "intro": "贵安超算中心以每秒1.3亿亿次运算速度昼夜运转，承接全国人工智能训练、影视渲染等订单。",
     "source": "http://m.cnwest.com/szyw/a/2026/08/30/23422856.html",
-    "sourceName": "西部网",
-    "id": "520000-hpc-001",
+    "sourceName": "华商网",
+    "id": "520000-005",
     "createdAt": "2026-09-08",
-    "updatedAt": null
+    "updatedAt": "2026-09-08"
   },
   {
     "name": "苹果iCloud贵安数据中心",
@@ -5175,7 +5013,7 @@ window.PROJECTS = [
     "intro": "苹果iCloud贵安数据中心自2021年投运，已实现100%可再生能源驱动，持续追加投资达数十亿美元。",
     "source": "https://hao.cnyes.com/post/265351",
     "sourceName": "鉅亨號",
-    "id": "520000-clu-001",
+    "id": "520000-006",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5202,36 +5040,9 @@ window.PROJECTS = [
     "intro": "兴业银行为中国移动宁夏数据中心二期等算力项目提供融资近10亿元，助力宁夏算力产业发展。",
     "source": "https://fjrb.fjdaily.com/pc/con/202609/02/content_561320.html",
     "sourceName": "福建日报",
-    "id": "640000-idc-006",
+    "id": "640000-025",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "中国电信京津冀智能算力中心",
-    "province": "天津",
-    "city": "天津市",
-    "district": "武清区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "约3.76 EFLOPS（FP16）国产高性能算力",
-    "level": 3,
-    "aiP": 3760.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2024,
-    "announced": "2026-08",
-    "estimated": false,
-    "coord": [
-      117.0,
-      39.4
-    ],
-    "intro": "京津冀地区技术先进的绿色智能算力枢纽，建成国产液冷单集群万卡智算资源池，PUE控制在1.15以内。",
-    "source": "https://www.news.cn/info/20260831/90ebcbf28cc14fcfafd98d3b0c370da0/c.html",
-    "sourceName": "新华网",
-    "id": "120000-aic-002",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "雅砻江两河口算电融合示范项目",
@@ -5256,34 +5067,7 @@ window.PROJECTS = [
     "intro": "全国首个高海拔岩洞式算力舱智算中心，100%零碳绿电。",
     "source": "https://sichuan.scol.com.cn/ggxw/202609/83317267.html",
     "sourceName": "四川在线",
-    "id": "510000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "远景乌兰察布星河基地智算园区",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "集宁区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "全球建筑面积最大的单栋数据中心，规划可支撑百万卡级别并行算力",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      113.12,
-      41.03
-    ],
-    "intro": "远景科技集团在乌兰察布建设的智算基地，2026年8月正式投产，订单已排至三年后。",
-    "source": "https://caifuhao.eastmoney.com/news/20260902134231314587320",
-    "sourceName": "东方财富网",
-    "id": "150000-aic-007",
+    "id": "510000-004",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5310,7 +5094,7 @@ window.PROJECTS = [
     "intro": "河北省首个全栈国产化人工智能公共算力平台，服务1000多家企业、200多个高校及科研机构。",
     "source": "https://www.lf.gov.cn/Item/157133.aspx",
     "sourceName": "廊坊市人民政府",
-    "id": "130000-aic-003",
+    "id": "130000-008",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5337,36 +5121,9 @@ window.PROJECTS = [
     "intro": "探索绿电直供协同模式，未来园区80%以上用电将来源于张家口绿电。",
     "source": "https://www.hebtv.com/0/0rmhlm/qy/hbxwlb/lbhj/12493142.shtml",
     "sourceName": "河北广播电视台",
-    "id": "130000-idc-005",
+    "id": "130000-009",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "魏桥国科智算中心（二期）",
-    "province": "山东",
-    "city": "滨州市",
-    "district": "邹平市",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "完成二期建设",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-09",
-    "estimated": true,
-    "coord": [
-      117.7,
-      36.9
-    ],
-    "intro": "魏桥国科用于研发的智算中心，已完成二期建设。",
-    "source": "https://www.zhiding.cn/ai-economy/2026/0902/3198135.shtml",
-    "sourceName": "至顶网",
-    "id": "370000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
   },
   {
     "name": "庆阳百万千瓦级绿电聚合供应数据中心试点项目",
@@ -5391,7 +5148,7 @@ window.PROJECTS = [
     "intro": "通过算力和绿电协同，推动清洁能源就地消纳。",
     "source": "https://www.cpem.org.cn/list5/119302.html",
     "sourceName": "CPEM全国电力设备管理网",
-    "id": "620000-aic-002",
+    "id": "620000-005",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5399,26 +5156,26 @@ window.PROJECTS = [
     "name": "中国联通乌镇智算中心一期",
     "province": "浙江",
     "city": "嘉兴市",
-    "district": "乌镇",
+    "district": "桐乡市乌镇",
     "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "一期算力2000PFLOPS，计划2026年完成万卡集群",
+    "stage": "在建",
+    "scaleText": "一期算力规模2000PFLOPS，计划2026年完成万卡集群建设",
     "level": 3,
     "aiP": 2000.0,
     "hpcP": null,
     "racks": null,
-    "vendor": "混合",
+    "vendor": "其他",
     "year": 2026,
     "announced": "2026-08",
     "estimated": false,
     "coord": [
       120.5,
-      30.7
+      30.75
     ],
-    "intro": "中国联通乌镇智算中心一期，推进万卡集群建设。",
+    "intro": "中国联通乌镇智算中心一期算力规模2000PFLOPS，计划2026年完成万卡集群建设。",
     "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
     "sourceName": "中国日报",
-    "id": "330000-aic-004",
+    "id": "330000-007",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5434,72 +5191,45 @@ window.PROJECTS = [
     "aiP": null,
     "hpcP": null,
     "racks": null,
-    "vendor": null,
+    "vendor": "其他",
     "year": 2026,
     "announced": "2026-08",
     "estimated": true,
     "coord": [
       120.6,
-      31.1
+      31.16
     ],
-    "intro": "中国联通长三角（吴江）智算中心项目已获备案。",
+    "intro": "中国联通长三角（吴江）智算中心项目已获备案，总投资达51亿元。",
     "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
     "sourceName": "中国日报",
-    "id": "320000-aic-003",
+    "id": "320000-006",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
   {
-    "name": "国家超算互联网核心节点",
-    "province": "河南",
-    "city": "郑州市",
-    "district": "郑东新区",
-    "type": "超算中心",
-    "stage": "已建成",
-    "scaleText": "规划智算5万P/超算4000P，已投运智算超3万P/超算2400P",
-    "level": 5,
-    "aiP": null,
-    "hpcP": 2400.0,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-09",
-    "estimated": false,
-    "coord": [
-      113.6,
-      34.8
-    ],
-    "intro": "全国首个十万卡级超算、智算融合算力资源池，正式上线运行。",
-    "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
-    "sourceName": "中国日报网",
-    "id": "410000-hpc-002",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "南方电网贵州浸没式液冷数据中心（算力方舱）",
+    "name": "南方电网贵州浸没式液冷数据中心",
     "province": "贵州",
     "city": "贵阳市",
     "district": "贵安新区",
     "type": "通用·云",
     "stage": "已建成",
-    "scaleText": "微型数据中心，浸没式液冷",
+    "scaleText": "浸没式液冷数据中心，贵州首个算力方舱",
     "level": 1,
     "aiP": null,
     "hpcP": null,
-    "racks": 4.0,
+    "racks": null,
     "vendor": null,
     "year": 2026,
     "announced": "2026-08",
     "estimated": true,
     "coord": [
-      106.5,
-      26.4
+      106.63,
+      26.65
     ],
-    "intro": "贵州首个算力方舱，浸没式液冷数据中心，探索算电协同。",
+    "intro": "南方电网贵州电网公司8月初建成投运的浸没式液冷数据中心，是贵州首个算力方舱，体现算电协同。",
     "source": "https://app.xinhuanet.com/news/article.html?articleId=20260830507aefdae6764f5289a9ddd5f445d967",
     "sourceName": "新华网",
-    "id": "520000-clu-002",
+    "id": "520000-007",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5526,7 +5256,7 @@ window.PROJECTS = [
     "intro": "光环新网在内蒙古规划两个智算中心项目，总投资约35亿元，处于前期审批筹划阶段。",
     "source": "https://user.guancha.cn/main/content?id=1723223&s=fwzwyzzwzbt",
     "sourceName": "观察者网",
-    "id": "150000-aic-008",
+    "id": "150000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5553,7 +5283,7 @@ window.PROJECTS = [
     "intro": "光环新网陵水清水湾跨境产业云基地主要提供算力服务，目前处于建设施工阶段。",
     "source": "https://user.guancha.cn/main/content?id=1723223&s=fwzwyzzwzbt",
     "sourceName": "观察者网",
-    "id": "460000-clu-001",
+    "id": "460000-004",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5561,26 +5291,26 @@ window.PROJECTS = [
     "name": "魏桥国科智算中心二期",
     "province": "山东",
     "city": "滨州市",
-    "district": "邹平市",
+    "district": "魏桥国科",
     "type": "智算中心",
     "stage": "已建成",
-    "scaleText": "约2000P高性能算力",
-    "level": 3,
-    "aiP": 2000.0,
+    "scaleText": "已完成二期建设",
+    "level": 1,
+    "aiP": null,
     "hpcP": null,
     "racks": null,
-    "vendor": "其他",
-    "year": 2025,
-    "announced": "2025-01",
-    "estimated": false,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
     "coord": [
-      117.7,
-      36.9
+      118.0,
+      37.4
     ],
-    "intro": "魏桥国科智算中心二期于2025年1月上线，定位大规模高性能算力基础设施，采用纯商业化运营模式。",
-    "source": "https://www.cio360.net/show-604-105033-1.html",
-    "sourceName": "CIO360",
-    "id": "370000-aic-004",
+    "intro": "魏桥国科智算中心完成二期建设，成为关键基础设施。",
+    "source": "https://www.zhiding.cn/ai-economy/2026/0902/3198135.shtml",
+    "sourceName": "至顶网",
+    "id": "370000-008",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5607,88 +5337,34 @@ window.PROJECTS = [
     "intro": "新疆单体规模领先的智能计算集群，总投资10亿元，当年开工、当年建成、当年投产并实现盈利。",
     "source": "http://www.xj.chinanews.com.cn/dizhou/2026-08-22/detail-ihfimfee7180845.shtml",
     "sourceName": "中国新闻网新疆频道",
-    "id": "650000-aic-005",
+    "id": "650000-007",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
   {
-    "name": "中国电信京津冀智能算力中心（国产液冷万卡集群）",
+    "name": "中国电信京津冀智能算力中心",
     "province": "天津",
     "city": "天津市",
     "district": "武清区",
     "type": "智算中心",
     "stage": "已建成",
-    "scaleText": "3.76 EFLOPS (FP16)",
+    "scaleText": "约3.76 EFLOPS（FP16）国产高性能算力",
     "level": 3,
     "aiP": 3760.0,
     "hpcP": null,
     "racks": null,
-    "vendor": "昇腾",
-    "year": 2024,
+    "vendor": "混合",
+    "year": 2025,
     "announced": "2026-08",
-    "estimated": false,
+    "estimated": true,
     "coord": [
       117.04,
       39.38
     ],
-    "intro": "中国电信京津冀首个国产液冷单集群万卡智算资源池，PUE低于1.15。",
-    "source": "https://www.news.cn/info/20260831/90ebcbf28cc14fcfafd98d3b0c370da0/c.html",
+    "intro": "中国电信京津冀智能算力中心建成国产液冷单集群万卡智算资源池，提供约3.76 EFLOPS国产算力，PUE低于1.15。",
+    "source": "https://www.news.cn/info/20260831/90ebcbf28cc14fcfaf98d3b0c370da0/c.html",
     "sourceName": "新华网",
-    "id": "120000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "两河口算电融合示范项目",
-    "province": "四川",
-    "city": "甘孜藏族自治州",
-    "district": "雅江县",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "在电站隧洞内规模化部署国产算力芯片",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "其他",
-    "year": 2026,
-    "announced": "2026-09",
-    "estimated": true,
-    "coord": [
-      101.0,
-      30.0
-    ],
-    "intro": "开创绿电变算力四川模式，实现电支撑算、算优化电。",
-    "source": "https://cbgc.scol.com.cn/news/7921264",
-    "sourceName": "四川在线",
-    "id": "510000-aic-004",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "国家超算互联网核心节点项目",
-    "province": "河南",
-    "city": "郑州市",
-    "district": "郑东新区",
-    "type": "超算中心",
-    "stage": "在建",
-    "scaleText": "规划智算5万P/超算4000P，已投运智算超3万P/超算2400P",
-    "level": 5,
-    "aiP": null,
-    "hpcP": 2400.0,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-06",
-    "estimated": false,
-    "coord": [
-      113.7,
-      34.8
-    ],
-    "intro": "国家超算互联网核心节点项目，预计2026年6月全部建成投用后实现单体算力中心超算与智算国内双料第一。",
-    "source": "https://public.zhengzhou.gov.cn/D1102X/10227156.jhtml",
-    "sourceName": "郑州市人民政府",
-    "id": "410000-hpc-003",
+    "id": "120000-005",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5715,7 +5391,7 @@ window.PROJECTS = [
     "intro": "一期2024年6月投产，二期全面建成后将成为江苏算力枢纽。",
     "source": "https://news.futunn.com/en/post/78516986",
     "sourceName": "证券时报",
-    "id": "320000-aic-004",
+    "id": "320000-007",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5742,34 +5418,7 @@ window.PROJECTS = [
     "intro": "国家东数西算枢纽节点，承载全国超25%的独立模型AI Token运算需求。",
     "source": "https://www.cpem.org.cn/list5/119302.html",
     "sourceName": "CPEM全国电力设备管理网",
-    "id": "620000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "陕西渭南华山云数据中心",
-    "province": "陕西",
-    "city": "渭南市",
-    "district": "渭南高新区",
-    "type": "通用·云",
-    "stage": "已建成",
-    "scaleText": "算力网络下沉节点",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      109.51,
-      34.5
-    ],
-    "intro": "陕西渭南华山云数据中心投运，算力基础设施向末梢下沉。",
-    "source": "https://eu.36kr.com/zh/p/3933058929671299",
-    "sourceName": "36氪",
-    "id": "610000-clu-011",
+    "id": "620000-006",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5796,7 +5445,7 @@ window.PROJECTS = [
     "intro": "山东德州鲁北大数据中心投运，算力基础设施向末梢下沉。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "370000-clu-001",
+    "id": "370000-009",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5823,7 +5472,7 @@ window.PROJECTS = [
     "intro": "南疆首个智能绿色算力中心丝路慧途智算中心投运，算力基础设施向末梢下沉。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "650000-aic-006",
+    "id": "650000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5850,36 +5499,9 @@ window.PROJECTS = [
     "intro": "云南首个千P级县域算力枢纽广南云数算力中心投运，算力基础设施向末梢下沉。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "530000-aic-003",
+    "id": "530000-004",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "百度中卫智算中心",
-    "province": "宁夏",
-    "city": "中卫市",
-    "district": "中卫工业园区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "算力规模达1.1万P",
-    "level": 5,
-    "aiP": 11000.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "其他",
-    "year": 2025,
-    "announced": "2026-09",
-    "estimated": false,
-    "coord": [
-      105.2,
-      37.5
-    ],
-    "intro": "百度自建的智算中心2025年已投入运营，算力规模达1.1万P。",
-    "source": "http://www.wzs.org.cn/sjzs/news?id=25490",
-    "sourceName": "世界浙商网",
-    "id": "640000-aic-016",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "中卫工业园区协鑫能源算力中心",
@@ -5904,7 +5526,7 @@ window.PROJECTS = [
     "intro": "近期中卫工业园区和协鑫能源签约算力中心项目，规划Token工厂。",
     "source": "http://www.wzs.org.cn/sjzs/news?id=25490",
     "sourceName": "世界浙商网",
-    "id": "640000-aic-017",
+    "id": "640000-027",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -5931,7 +5553,7 @@ window.PROJECTS = [
     "intro": "宁夏驭星属陈航天科技有限公司建设航天云数据中心，供客户长期存储和调用。",
     "source": "https://zjnews.zjol.com.cn/202608/t20260831_31879177.shtml",
     "sourceName": "浙江在线",
-    "id": "640000-clu-005",
+    "id": "640000-028",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5958,7 +5580,7 @@ window.PROJECTS = [
     "intro": "郑州超算互联网核心节点全面采用国产算力设备，标志自主可控算力体系建成。",
     "source": "https://www.cio360.net/show-611-105013-1.html",
     "sourceName": "中国信息化周报",
-    "id": "410000-hpc-004",
+    "id": "410000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -5985,7 +5607,7 @@ window.PROJECTS = [
     "intro": "广州推理算力中心全面采用国产算力设备，标志自主可控算力体系建成。",
     "source": "https://www.cio360.net/show-611-105013-1.html",
     "sourceName": "中国信息化周报",
-    "id": "440000-aic-004",
+    "id": "440000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6012,36 +5634,9 @@ window.PROJECTS = [
     "intro": "龙岗区万P城投自建算力池建成投用。",
     "source": "https://www.lg.gov.cn/bmzz/qyfwzx/xxgk/qt/gzdt/content/post_12969602.html",
     "sourceName": "龙岗区政府",
-    "id": "440000-aic-005",
+    "id": "440000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "中国电信京津冀智能算力中心（万卡集群）",
-    "province": "天津",
-    "city": "天津市",
-    "district": "武清区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "国产液冷单集群万卡智算资源池，可提供约3.76 EFLOPS（FP16）国产高性能算力",
-    "level": 3,
-    "aiP": 3760.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2024,
-    "announced": "2024-01",
-    "estimated": false,
-    "coord": [
-      117.0,
-      39.4
-    ],
-    "intro": "中国电信京津冀首个、集团首批国产液冷单集群万卡智算资源池，PUE控制在1.15以内。",
-    "source": "https://www.news.cn/info/20260831/90ebcbf28cc14fcfaf98d3b0c370da0/c.html",
-    "sourceName": "新华网",
-    "id": "120000-aic-004",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "中国移动（宁夏中卫）数据中心B园区",
@@ -6066,34 +5661,7 @@ window.PROJECTS = [
     "intro": "全国首个全面投用的大规模“源网荷储”一体化数据中心园区，绿电使用率超80%。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "640000-idc-007",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "中国移动呼和浩特智算中心新增万卡集群",
-    "province": "内蒙古",
-    "city": "呼和浩特市",
-    "district": null,
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "新增10048张AI加速卡，智能算力规模6.7EFLOPS",
-    "level": 4,
-    "aiP": 6700.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2026,
-    "announced": "2026-09",
-    "estimated": false,
-    "coord": [
-      111.75,
-      40.84
-    ],
-    "intro": "全球运营商最大单体智算中心，AI芯片国产化率超85%，新增万卡集群。",
-    "source": "https://news.qq.com/rain/a/20260904A0BBDT00?ptag=ima",
-    "sourceName": "腾讯新闻",
-    "id": "150000-aic-009",
+    "id": "640000-029",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6120,7 +5688,7 @@ window.PROJECTS = [
     "intro": "澳门跑狗图论坛精华帖分布式算力网络在苏州工业园区启用全球首个超大规模算力中心，一期部署500 PFLOPS算力。",
     "source": "https://m.ttplus.cn/wiki/s4QzT1UBW2P5.php",
     "sourceName": "天极网",
-    "id": "320000-aic-005",
+    "id": "320000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6147,7 +5715,7 @@ window.PROJECTS = [
     "intro": "疆算入渝起点，已吸引中国移动、阿里云等19家企业入驻，21个重点项目落地。",
     "source": "https://finance.sina.cn/2026-09-06/detail-iniqwnma6514803.d.html?vt=4&wm=4007%2C4007%2C4007%2C4007%2F%2F%2F%2F%3Fvt",
     "sourceName": "新浪财经",
-    "id": "650000-aic-007",
+    "id": "650000-009",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6174,7 +5742,7 @@ window.PROJECTS = [
     "intro": "哈密（伊吾）算力创新示范区内的先进计算集群，100%绿电。",
     "source": "https://finance.sina.cn/2026-09-06/detail-iniqwnma6514803.d.html?vt=4&wm=4007%2C4007%2C4007%2C4007%2F%2F%2F%2F%3Fvt",
     "sourceName": "新浪财经",
-    "id": "650000-aic-008",
+    "id": "650000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6201,7 +5769,7 @@ window.PROJECTS = [
     "intro": "苏州电信智算中心规划远期1万架高功率算力机架，总算力5000PFLOPS，一期已投产，二期建成后将成为江苏算力枢纽。",
     "source": "https://news.futunn.com/en/post/78516986",
     "sourceName": "富途新闻",
-    "id": "320000-aic-006",
+    "id": "320000-009",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6228,63 +5796,9 @@ window.PROJECTS = [
     "intro": "是石科技全国超智算运营中心纳管算力超2万PFLOPS，利用率达86%，专注于超算与人工智能融合。",
     "source": "https://news.futunn.com/en/post/78516986",
     "sourceName": "富途新闻",
-    "id": "330000-aic-005",
+    "id": "330000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "庆阳数据中心集群（扩容）",
-    "province": "甘肃",
-    "city": "庆阳市",
-    "district": "西峰区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "集群算力总量18.55万PFlops，机架超10万架",
-    "level": 5,
-    "aiP": 185500.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      107.6,
-      35.7
-    ],
-    "intro": "庆阳数据中心集群算力总量达18.55万PFlops，建成机架超10万架，绿电使用占比超80%。",
-    "source": "https://www.cpem.org.cn/list5/119302.html",
-    "sourceName": "CPEM全国电力设备管理网",
-    "id": "620000-aic-004",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "国家超算互联网核心节点（郑州）",
-    "province": "河南",
-    "city": "郑州市",
-    "district": "郑东新区",
-    "type": "超算中心",
-    "stage": "已建成",
-    "scaleText": "规划智算5万P/超算4000P，已投运智算超3万P/超算2400P",
-    "level": 5,
-    "aiP": null,
-    "hpcP": 30000.0,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-07",
-    "estimated": true,
-    "coord": [
-      113.62,
-      34.75
-    ],
-    "intro": "国家超算互联网核心节点在郑州上线，全国首个十万卡集群，实现超算与智算算力国内双料第一。",
-    "source": "https://www.jiuzhoub.com/chengshi/1493.html",
-    "sourceName": "九州报",
-    "id": "410000-hpc-005",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "河南空港智算中心",
@@ -6309,7 +5823,7 @@ window.PROJECTS = [
     "intro": "郑州市重大算力项目，有序推进中。",
     "source": "https://public.zhengzhou.gov.cn/D1102X/10227156.jhtml",
     "sourceName": "郑州市人民政府",
-    "id": "410000-aic-004",
+    "id": "410000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6336,7 +5850,7 @@ window.PROJECTS = [
     "intro": "郑州市重大算力项目，有序推进中。",
     "source": "https://public.zhengzhou.gov.cn/D1102X/10227156.jhtml",
     "sourceName": "郑州市人民政府",
-    "id": "410000-aic-005",
+    "id": "410000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6363,7 +5877,7 @@ window.PROJECTS = [
     "intro": "郑东新区算力产业园是郑州市高标准谋划的算力产业专业园区。",
     "source": "https://public.zhengzhou.gov.cn/D1102X/10227156.jhtml",
     "sourceName": "郑州市人民政府",
-    "id": "410000-clu-001",
+    "id": "410000-012",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6390,63 +5904,9 @@ window.PROJECTS = [
     "intro": "郑高新数算产业园是郑州市规划建设的算力产业园区。",
     "source": "https://public.zhengzhou.gov.cn/D1102X/10227156.jhtml",
     "sourceName": "郑州市人民政府",
-    "id": "410000-clu-002",
+    "id": "410000-013",
     "createdAt": "2026-09-08",
     "updatedAt": null
-  },
-  {
-    "name": "国家超级计算西安中心（接入国家超算互联网）",
-    "province": "陕西",
-    "city": "西安市",
-    "district": "雁塔区",
-    "type": "超算中心",
-    "stage": "已建成",
-    "scaleText": "未明确",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      108.9,
-      34.2
-    ],
-    "intro": "国家超级计算西安中心于2026年7月实现与国家超算互联网核心节点的连接调度。",
-    "source": "https://m.21jingji.com/article/20260831/herald/837c0a66e9c3240dff0208b0e632c2e2_zaker.html",
-    "sourceName": "21世纪经济报道",
-    "id": "610000-hpc-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "星河AI算力数据中心",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "乌兰察布",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "100万PFLOPS，100万个AI加速器，2GW",
-    "level": 5,
-    "aiP": 100000000.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": false,
-    "coord": [
-      113.1,
-      41.0
-    ],
-    "intro": "全球最大单体AI数据中心，规划容量超2GW，支持百万卡运行。",
-    "source": "https://www.guancha.cn/industry-science/2026_08_11_826872.shtml",
-    "sourceName": "观察者网",
-    "id": "150000-aic-010",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
   },
   {
     "name": "四川首个Token工厂",
@@ -6471,7 +5931,7 @@ window.PROJECTS = [
     "intro": "四川首个Token工厂落地雅安，预计本月内产能达3万亿词元，目标月产能10万亿词元。",
     "source": "http://sc.people.com.cn/n2/2026/0907/c345167-41688369.html",
     "sourceName": "人民网四川",
-    "id": "510000-clu-001",
+    "id": "510000-006",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6498,7 +5958,7 @@ window.PROJECTS = [
     "intro": "极智科技西南研发生产基地在成都高新区开工，提升智能计算平台产能。",
     "source": "https://m.ttplus.cn/wikiwUyLIEX",
     "sourceName": "体坛加",
-    "id": "510000-clu-002",
+    "id": "510000-007",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -6525,34 +5985,7 @@ window.PROJECTS = [
     "intro": "布局卫星+算力+数据产业生态，探索算力出海。",
     "source": "https://www.stdaily.com/web/gdxw/2026-09/02/content_573849.html",
     "sourceName": "科技日报",
-    "id": "650000-clu-002",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
-  },
-  {
-    "name": "乌兰察布算力中心集群",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "集宁区",
-    "type": "智算中心",
-    "stage": "在建",
-    "scaleText": "2026年算力总规模突破20万PFLOPS",
-    "level": 5,
-    "aiP": 200000.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": true,
-    "coord": [
-      113.1,
-      41.0
-    ],
-    "intro": "多个项目集中开工或投产，目标打造token之都。",
-    "source": "https://news.pedaily.cn/202608/567735.shtml",
-    "sourceName": "投资界",
-    "id": "150000-aic-011",
+    "id": "650000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6579,7 +6012,7 @@ window.PROJECTS = [
     "intro": "词元经济生态大会上正式上线，国家先进计算产业创新中心（安徽）启用。",
     "source": "https://www.cio360.net/show-597-105019-1.html",
     "sourceName": "中国信息化周报",
-    "id": "340000-aic-002",
+    "id": "340000-006",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6606,7 +6039,7 @@ window.PROJECTS = [
     "intro": "算力网络下沉至末梢，已投运。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "370000-clu-002",
+    "id": "370000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6633,7 +6066,7 @@ window.PROJECTS = [
     "intro": "中国移动在成都的智算中心，依托水蓄冷智能调控系统实现算力生产与电网负荷协同优化，2025年绿电占比93.24%。",
     "source": "https://www.cpem.org.cn/list5/119302.html",
     "sourceName": "中国电力报",
-    "id": "510000-aic-005",
+    "id": "510000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6660,7 +6093,7 @@ window.PROJECTS = [
     "intro": "中国电信在合肥的智算中心，参与算电协同调度，实现算力任务分钟级迁移。",
     "source": "https://www.cpem.org.cn/list5/119302.html",
     "sourceName": "中国电力报",
-    "id": "340000-aic-003",
+    "id": "340000-007",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6687,7 +6120,7 @@ window.PROJECTS = [
     "intro": "承接中国电信南岗园区迁移的算力任务，消纳当地风电。",
     "source": "https://www.cpem.org.cn/list5/119302.html",
     "sourceName": "中国电力报",
-    "id": "340000-clu-002",
+    "id": "340000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6714,7 +6147,7 @@ window.PROJECTS = [
     "intro": "城市级AI基础设施，一期已投入运营，承载客户测试需求。",
     "source": "http://news.e23.cn/jnnews/2026-09-07/2026090700021.html",
     "sourceName": "舜网新闻",
-    "id": "370000-aic-005",
+    "id": "370000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6741,34 +6174,7 @@ window.PROJECTS = [
     "intro": "粤港澳大湾区首个昇腾万卡智算集群，总算力9000P，用于大模型训练。",
     "source": "https://m.gmw.cn/toutiao/2026-09/03/content_38983016.htm",
     "sourceName": "光明网",
-    "id": "440000-aic-006",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "远景乌兰察布星河基地",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "乌兰察布",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "总规划容量2GW，支持百万卡",
-    "level": 5,
-    "aiP": 100000000.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": false,
-    "coord": [
-      113.1,
-      41.0
-    ],
-    "intro": "远景乌兰察布星河基地投产，全球最大AI算力超级单体。",
-    "source": "https://ifnews.com/news.html?aid=860717&cid=260",
-    "sourceName": "国际金融报",
-    "id": "150000-aic-012",
+    "id": "440000-012",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -6795,7 +6201,7 @@ window.PROJECTS = [
     "intro": "全国数据中心绿电直连项目，配套300兆瓦风光储电站。",
     "source": "https://news.pedaily.cn/202608/567735.shtml",
     "sourceName": "投资界",
-    "id": "150000-clu-003",
+    "id": "150000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6822,7 +6228,7 @@ window.PROJECTS = [
     "intro": "中国电信在庆阳的智能算力中心一期投用。",
     "source": "https://eu.36kr.com/zh/p/3933058929671299",
     "sourceName": "36氪",
-    "id": "620000-aic-005",
+    "id": "620000-008",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6849,36 +6255,9 @@ window.PROJECTS = [
     "intro": "全国首个大规模算电协同绿电直供项目，配套150万千瓦风电，直供算力园区。",
     "source": "https://www.wenxuecity.com/news/2026/09/03/126763912.html?read=1&subid=news",
     "sourceName": "文学城",
-    "id": "640000-clu-006",
+    "id": "640000-030",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "中国电信庆阳智能算力中心一期",
-    "province": "甘肃",
-    "city": "庆阳市",
-    "district": "西峰区",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "未明确规模",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": null,
-    "year": 2026,
-    "announced": "2026-03",
-    "estimated": true,
-    "coord": [
-      107.64,
-      35.71
-    ],
-    "intro": "中国电信在庆阳的智能算力中心一期于2026年3月投用。",
-    "source": "https://eu.36kr.com/zh/p/3933058929671299",
-    "sourceName": "36氪",
-    "id": "620000-aic-006",
-    "createdAt": "2026-09-08",
-    "updatedAt": null
   },
   {
     "name": "句容智能算力装备制造基地（江苏天工）",
@@ -6903,7 +6282,7 @@ window.PROJECTS = [
     "intro": "江苏句容经济开发区在建的算力基础设施制造项目，一期已投产，二期预计2026年10月竣工、11月投产，全部达产后年产3300套IT方舱等。",
     "source": "https://www.ycnews.cn/ycwx/2026/09-01/PDEoa0a1.html",
     "sourceName": "盐城新闻网",
-    "id": "320000-clu-001",
+    "id": "320000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6930,7 +6309,7 @@ window.PROJECTS = [
     "intro": "全国首个大规模算电协同绿电直供项目，2026年5月投运，配套150万千瓦风电，直供算力园区。",
     "source": "https://www.wenxuecity.com/news/2026/09/03/126763912.html",
     "sourceName": "文学城",
-    "id": "640000-clu-007",
+    "id": "640000-031",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -6954,64 +6333,10 @@ window.PROJECTS = [
       113.6,
       24.68
     ],
-    "intro": "聚焦AI大模型预训练与高并发智能推理，采用风液同源冷却系统。",
+    "intro": "秦淮数据南岭禅境一号基地聚焦AI大模型预训练与高并发智能推理，规划总IT负荷近200MW，采用风液同源冷却。",
     "source": "https://www.parkworld.net/Post/8df042a7244aadc",
     "sourceName": "园区世界",
-    "id": "440000-aic-007",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "中国移动智算中心（武汉）扩容",
-    "province": "湖北",
-    "city": "武汉市",
-    "district": "光谷",
-    "type": "智算中心",
-    "stage": "已建成",
-    "scaleText": "已上架算力2876PFLOPS，700多台机柜",
-    "level": 3,
-    "aiP": 2876.0,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "混合",
-    "year": 2026,
-    "announced": "2026-08",
-    "estimated": false,
-    "coord": [
-      114.4,
-      30.5
-    ],
-    "intro": "中国移动智算中心（武汉）扩容，联动全省算力集群。",
-    "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
-    "sourceName": "中国日报",
-    "id": "420000-aic-003",
-    "createdAt": "2026-09-08",
-    "updatedAt": "2026-09-08"
-  },
-  {
-    "name": "DeepSeek乌兰察布AI数据中心（16万颗昇腾950）",
-    "province": "内蒙古",
-    "city": "乌兰察布市",
-    "district": "集宁区",
-    "type": "智算中心",
-    "stage": "在建",
-    "scaleText": "16万颗华为昇腾950芯片",
-    "level": 1,
-    "aiP": null,
-    "hpcP": null,
-    "racks": null,
-    "vendor": "昇腾",
-    "year": 2026,
-    "announced": "2026-09",
-    "estimated": true,
-    "coord": [
-      113.1,
-      41.0
-    ],
-    "intro": "DeepSeek部署16万颗华为AI芯片，支撑大模型推理。",
-    "source": "https://www.worldjournal.com/wj/story/121347/9736327",
-    "sourceName": "世界日报",
-    "id": "150000-aic-013",
+    "id": "440000-013",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -7038,7 +6363,7 @@ window.PROJECTS = [
     "intro": "打造长三角北翼零碳智算标杆节点，承接长三角算力外溢。",
     "source": "https://t.cj.sina.cn/articles/view/5675440730/152485a5a0200267ay",
     "sourceName": "新浪财经",
-    "id": "320000-aic-007",
+    "id": "320000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7065,7 +6390,7 @@ window.PROJECTS = [
     "intro": "依托水电站的算电协同项目，二期规划从6个算力舱扩展到56个。",
     "source": "https://sichuan.scol.com.cn/ggxw/202609/83317267.html",
     "sourceName": "四川在线",
-    "id": "510000-aic-006",
+    "id": "510000-009",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -7073,15 +6398,15 @@ window.PROJECTS = [
     "name": "中国移动智算中心（武汉）",
     "province": "湖北",
     "city": "武汉市",
-    "district": "东湖高新区",
+    "district": "光谷",
     "type": "智算中心",
     "stage": "已建成",
-    "scaleText": "已上架算力2876PFLOPS",
-    "level": 5,
-    "aiP": 2876000.0,
+    "scaleText": "已上架算力达2876PFLOPS，8个机房、700多台机柜",
+    "level": 3,
+    "aiP": 2876.0,
     "hpcP": null,
     "racks": null,
-    "vendor": "混合",
+    "vendor": "其他",
     "year": 2026,
     "announced": "2026-08",
     "estimated": false,
@@ -7089,10 +6414,10 @@ window.PROJECTS = [
       114.4,
       30.5
     ],
-    "intro": "园区内8个机房、700多台机柜24小时运转，联动湖北移动全省27个数据中心形成集群效应。",
+    "intro": "中国移动智算中心（武汉）已上架算力达2876PFLOPS，联动湖北移动全省27个数据中心形成集群效应。",
     "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
-    "sourceName": "中国日报网",
-    "id": "420000-aic-004",
+    "sourceName": "中国日报",
+    "id": "420000-006",
     "createdAt": "2026-09-08",
     "updatedAt": "2026-09-08"
   },
@@ -7119,7 +6444,7 @@ window.PROJECTS = [
     "intro": "甘肃庆阳智慧蓝图西部智算中心开工，一期8860架机柜按十万卡规模设计。",
     "source": "https://m.huxiu.com/article/4889543.html?type=text",
     "sourceName": "虎嗅",
-    "id": "620000-aic-007",
+    "id": "620000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7146,7 +6471,7 @@ window.PROJECTS = [
     "intro": "四川首个Token工厂，依托雅安水电资源，目标2027年一季度进入国内词元工厂头部梯队。",
     "source": "http://sc.people.com.cn/n2/2026/0907/c345167-41688369.html",
     "sourceName": "人民网四川频道",
-    "id": "510000-clu-003",
+    "id": "510000-010",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7173,7 +6498,7 @@ window.PROJECTS = [
     "intro": "普洛斯为头部互联网企业定制的智算项目，建成后将成为大湾区最大规模智算中心之一。",
     "source": "https://finance.sina.com.cn/roll/2026-09-06/doc-iniqvzve7029222.shtml",
     "sourceName": "新浪财经",
-    "id": "440000-aic-008",
+    "id": "440000-014",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7200,7 +6525,7 @@ window.PROJECTS = [
     "intro": "广东恒算科技广州智算产业赋能中心项目，预计2027年12月投产。",
     "source": "https://fgw.gz.gov.cn/gkmlpt/content/10/10993/post_10993848.html",
     "sourceName": "广州市发改委",
-    "id": "440000-aic-009",
+    "id": "440000-015",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7227,7 +6552,7 @@ window.PROJECTS = [
     "intro": "永州南部算力中心一期建成投运，入选湖南省数字新基建100个标志性项目。",
     "source": "https://hunan.voc.com.cn/news/202609/33653725.html",
     "sourceName": "华声在线",
-    "id": "430000-clu-001",
+    "id": "430000-005",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7254,7 +6579,7 @@ window.PROJECTS = [
     "intro": "项目总投资约2亿元，规划建设6层智算中心，部署风冷和液冷机柜，预计2027年12月投产。",
     "source": "https://fgw.gz.gov.cn/gkmlpt/content/10/10993/post_10993848.html",
     "sourceName": "广州市发改委",
-    "id": "440000-aic-010",
+    "id": "440000-016",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7281,7 +6606,7 @@ window.PROJECTS = [
     "intro": "川西高原两河口水电站山体深处部署6个算力舱，探索水电与算力融合。",
     "source": "https://sichuan.scol.com.cn/ggxw/202609/83317267.html",
     "sourceName": "四川在线",
-    "id": "510000-aic-007",
+    "id": "510000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   },
@@ -7308,7 +6633,331 @@ window.PROJECTS = [
     "intro": "联通绿电智算中心，年底前投入使用。",
     "source": "https://www.ln.gov.cn/web/spzb/2026nxwfbh/2026082612281931100/index.shtml",
     "sourceName": "辽宁省政府",
-    "id": "210000-aic-003",
+    "id": "210000-004",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "DeepSeek乌兰察布AI数据中心",
+    "province": "内蒙古",
+    "city": "乌兰察布市",
+    "district": null,
+    "type": "智算中心",
+    "stage": "规划",
+    "scaleText": "部署16万颗华为昇腾950系列芯片",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "昇腾",
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
+    "coord": [
+      113.13,
+      41.03
+    ],
+    "intro": "DeepSeek在乌兰察布启动超大型数据中心建设，部署16万颗华为昇腾950系列芯片，支撑大模型推理。",
+    "source": "https://www.worldjournal.com/wj/story/121347/9736327?from=wj_catelistnews&zh-cn=",
+    "sourceName": "世界日报",
+    "id": "150000-012",
+    "createdAt": "2026-09-08",
+    "updatedAt": "2026-09-08"
+  },
+  {
+    "name": "远景乌兰察布星河基地",
+    "province": "内蒙古",
+    "city": "乌兰察布市",
+    "district": null,
+    "type": "智算中心",
+    "stage": "已建成",
+    "scaleText": "全球建筑面积最大的单栋数据中心，规划支撑百万卡级别并行算力",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "混合",
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": true,
+    "coord": [
+      113.13,
+      41.03
+    ],
+    "intro": "远景乌兰察布星河基地于2026年8月6日正式投产，拥有全球建筑面积最大的单栋数据中心，规划支撑百万卡级别并行算力。",
+    "source": "https://caifuhao.eastmoney.com/news/20260902134231314587320",
+    "sourceName": "东方财富",
+    "id": "150000-013",
+    "createdAt": "2026-09-08",
+    "updatedAt": "2026-09-08"
+  },
+  {
+    "name": "中国移动呼和浩特智算中心扩容工程",
+    "province": "内蒙古",
+    "city": "呼和浩特市",
+    "district": "东部",
+    "type": "运营商IDC",
+    "stage": "在建",
+    "scaleText": "规划6回220千伏出线，其中两回对接中国移动算力中心",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
+    "coord": [
+      111.7,
+      40.8
+    ],
+    "intro": "黄合少500千伏输变电工程将为该算力中心提供电力保障，计划11月底建成投运。",
+    "source": "https://thinktank.cnfin.com/szjj-lb/detail/20260903/4464732_1.html",
+    "sourceName": "中经智库",
+    "id": "150000-014",
+    "createdAt": "2026-09-08",
+    "updatedAt": "2026-09-08"
+  },
+  {
+    "id": "410000-005",
+    "createdAt": "2026-09-08",
+    "updatedAt": "2026-09-08",
+    "name": "国家超算互联网核心节点",
+    "province": "河南",
+    "city": "郑州市",
+    "district": null,
+    "type": "超算中心",
+    "stage": "已建成",
+    "scaleText": "全国首个十万卡级超算、智算融合的算力资源池",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": true,
+    "coord": [
+      113.65,
+      34.76
+    ],
+    "intro": "国家超算互联网核心节点在河南郑州正式上线运行，为全国首个十万卡级超算、智算融合的算力资源池。",
+    "source": "https://qiye.chinadaily.com.cn/a/202608/14/WS6a7e8306a310099e0fc7bb4c.html",
+    "sourceName": "中国日报"
+  },
+  {
+    "name": "贵州壹号词元工厂",
+    "province": "贵州",
+    "city": "贵阳市",
+    "district": "贵安新区",
+    "type": "智算中心",
+    "stage": "已建成",
+    "scaleText": "一期算力集群规模超3000 PFLOPS，日均产能超3000亿词元",
+    "level": 3,
+    "aiP": 3000.0,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "混合",
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": false,
+    "coord": [
+      106.6,
+      26.4
+    ],
+    "intro": "软通动力和贵州电信联合发布的词元工厂，面向智能体时代，已落地贵安新区。",
+    "source": "http://gz.people.com.cn/n2/2026/0830/c414821-41681728.html",
+    "sourceName": "人民网",
+    "id": "520000-008",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "中国移动贵阳数据中心",
+    "province": "贵州",
+    "city": "贵阳市",
+    "district": "贵安新区",
+    "type": "运营商IDC",
+    "stage": "已建成",
+    "scaleText": "智算能力2P，总算力规模176EFLOPS（全省）",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": true,
+    "coord": [
+      106.63,
+      26.65
+    ],
+    "intro": "中国移动在贵阳的数据中心，智算能力已提升至2P，支撑东数西算。",
+    "source": "http://m.cnwest.com/szyw/a/2026/08/30/23422856.html",
+    "sourceName": "聚焦2026数博会｜东数西算，贵州算明白了三件事",
+    "id": "520000-009",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "韶关智算中心项目群",
+    "province": "广东",
+    "city": "韶关市",
+    "district": "韶关数据中心集群",
+    "type": "智算中心",
+    "stage": "在建",
+    "scaleText": "规划166万标准机架，上架算力规模4万P",
+    "level": 5,
+    "aiP": 40000.0,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "混合",
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
+    "coord": [
+      113.6,
+      24.8
+    ],
+    "intro": "韶关已落地23个智算中心项目，建成5个万卡算力集群，下半年十多个项目开工。",
+    "source": "https://m.thepaper.cn/newsDetail_forward_33757066",
+    "sourceName": "澎湃新闻",
+    "id": "440000-017",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "中国电信呼和浩特智算中心",
+    "province": "内蒙古",
+    "city": "呼和浩特市",
+    "district": "东部",
+    "type": "运营商IDC",
+    "stage": "在建",
+    "scaleText": "规划6回220千伏出线，其中一回对接中国电信算力中心",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
+    "coord": [
+      111.7,
+      40.8
+    ],
+    "intro": "黄合少500千伏输变电工程将为该算力中心提供电力保障，计划11月底建成投运。",
+    "source": "https://thinktank.cnfin.com/szjj-lb/detail/20260903/4464732_1.html",
+    "sourceName": "中经智库",
+    "id": "150000-015",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "世纪互联乌兰察布数据中心",
+    "province": "内蒙古",
+    "city": "乌兰察布市",
+    "district": "察哈尔高新区大数据产业园",
+    "type": "通用·云",
+    "stage": "在建",
+    "scaleText": "全站IT总供电功率可达1160兆瓦，年满负荷用电量超100亿千瓦时",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-09",
+    "estimated": true,
+    "coord": [
+      113.1,
+      41.0
+    ],
+    "intro": "世纪互联乌兰察布战区数据中心项目，三年内陆续投产。",
+    "source": "https://thinktank.cnfin.com/szjj-lb/detail/20260903/4464732_1.html",
+    "sourceName": "中经智库",
+    "id": "150000-016",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "宿州市算力产业园淮海人工智能计算中心",
+    "province": "安徽",
+    "city": "宿州市",
+    "district": null,
+    "type": "智算中心",
+    "stage": "已建成",
+    "scaleText": "2026年整体算力规模将达到约8000P",
+    "level": 4,
+    "aiP": 8000.0,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "其他",
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": true,
+    "coord": [
+      116.98,
+      33.63
+    ],
+    "intro": "宿州市算力产业园淮海人工智能计算中心，2026年整体算力规模将达到约8000P。",
+    "source": "https://www.thecover.cn/news/tVoNbZry74GH90qSdq8Jkw==",
+    "sourceName": "封面新闻",
+    "id": "340000-009",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "国创智算中心",
+    "province": "安徽",
+    "city": "宿州市",
+    "district": null,
+    "type": "智算中心",
+    "stage": "已建成",
+    "scaleText": "面向人工智能模型训练、自动驾驶等应用",
+    "level": 1,
+    "aiP": null,
+    "hpcP": null,
+    "racks": null,
+    "vendor": "其他",
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": true,
+    "coord": [
+      116.98,
+      33.63
+    ],
+    "intro": "国创智算中心面向人工智能模型训练、自动驾驶等应用。",
+    "source": "https://www.thecover.cn/news/tVoNbZry74GH90qSdq8Jkw==",
+    "sourceName": "封面新闻",
+    "id": "340000-010",
+    "createdAt": "2026-09-08",
+    "updatedAt": null
+  },
+  {
+    "name": "汴水之畔科学计算中心",
+    "province": "安徽",
+    "city": "宿州市",
+    "district": null,
+    "type": "超算中心",
+    "stage": "已建成",
+    "scaleText": "约1550台服务器组成约15P超算能力",
+    "level": 2,
+    "aiP": null,
+    "hpcP": 15.0,
+    "racks": null,
+    "vendor": null,
+    "year": 2026,
+    "announced": "2026-08",
+    "estimated": false,
+    "coord": [
+      116.98,
+      33.63
+    ],
+    "intro": "汴水之畔科学计算中心约1550台服务器组成约15P超算能力，服务科学计算、人工智能等领域。",
+    "source": "https://www.thecover.cn/news/tVoNbZry74GH90qSdq8Jkw==",
+    "sourceName": "封面新闻",
+    "id": "340000-011",
     "createdAt": "2026-09-08",
     "updatedAt": null
   }
@@ -7775,17 +7424,17 @@ window.POLICIES = [
     "updatedAt": "2026-09-08"
   },
   {
-    "title": "人工智能中小企业创业支持计划（2026—2028年）",
+    "title": "人工智能中小企业创业支持计划（2026-2028年）",
     "level": "国家级",
     "region": "全国",
     "publisher": "工业和信息化部",
-    "date": "2026-09",
+    "date": "2026-08",
     "category": "人工智能",
-    "content": "提出三年内在行业应用、数据服务、智能算力等领域新培育科技和创新型中小企业1万家以上，专精特新“小巨人”企业突破2000家。",
-    "link": "https://finance.sina.cn/2026-09-07/detail-iniqyriy6374514.d.html?vt=4",
+    "content": "通过三年时间，在行业应用、数据服务、智能算力等重点领域，培育一大批人工智能创业企业，新培育科技和创新企业。",
+    "link": "https://www.jiemian.com/article/15063154.html",
     "id": "pol-035",
     "createdAt": "2026-09-08",
-    "updatedAt": null
+    "updatedAt": "2026-09-08"
   },
   {
     "title": "成都市关于优化科技创新生态的实施意见",

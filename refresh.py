@@ -19,8 +19,10 @@ AI 检索接入：fetch_latest() 采用「Tavily 实时检索 + DeepSeek 结构�
 """
 
 import datetime
+import difflib
 import json
 import os
+import re
 import sys
 import time
 
@@ -45,8 +47,6 @@ VENDOR_LIST = ['昇腾', 'NVIDIA', '寒武纪', '海光', '阿里', '百度', '�
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE, 'data.json')
-
-TYPE_CODE = {'超算中心': 'hpc', '智算中心': 'aic', '运营商IDC': 'idc', '通用·云': 'clu'}
 
 # 给模型的 JSON 输出契约（与 data.json 字段一致）
 _SCHEMA = """{"projects": [{"name": "项目全称", "province": "省份简称如陕西", "city": "地市如西安市",
@@ -156,15 +156,14 @@ def _date():
 
 
 def _next_id(data, p):
-    """为没有 id 的新项目按 {adcode}-{type}-{三位序号} 生成语义主键。"""
+    """为没有 id 的新项目按 {adcode}-{三位序号} 生成稳定主键（不含 type）。"""
     ad = {x['s']: x['adcode'] for x in data['constants']['PROVINCES']}.get(
         p.get('province'), '000000')
-    tc = TYPE_CODE.get(p.get('type'), 'oth')
-    prefix = '%s-%s-' % (ad, tc)
+    prefix = '%s-' % ad
     seq = 0
     for it in data['projects']:
         did = it.get('id', '')
-        if did.startswith(prefix):
+        if isinstance(did, str) and did.startswith(prefix):
             try:
                 seq = max(seq, int(did.rsplit('-', 1)[-1]))
             except ValueError:
@@ -177,14 +176,47 @@ def _business_fields(item):
     return {k: v for k, v in item.items() if k not in _META_KEYS}
 
 
-def _upsert(data, incoming, key, gen_id):
-    """按主键增量合并一批记录，返回 (新增数, 更新数)。"""
+def _match_existing_project(data, p):
+    """对无 id 的增量项目匹配已有项目。
+
+    - 同省 + 归一化名(去括号)精确相等 → 返回已有 id（可靠，自动复用）；
+    - 名称近似但不相等 → 仅打印告警提示人工确认，返回 None（不自动合并）。
+      实测「超算/智算」「苏州/苏州电信」与「百度/百度中卫」相似度同为 0.857，
+      自动合并会误删真实不同项目，故近似只告警。
+    """
+    k = _norm_name(p.get('name'))
+    prov = p.get('province')
+    city = p.get('city')
+    for old in data['projects']:
+        if old.get('province') == prov and _norm_name(old.get('name')) == k:
+            return old['id']
+    for old in data['projects']:
+        if old.get('province') != prov:
+            continue
+        if city and old.get('city') and old.get('city') != city:
+            continue
+        r = difflib.SequenceMatcher(None, k, _norm_name(old.get('name'))).ratio()
+        if r > 0.85:
+            print('[疑似重复] "%s" 与已有 "%s"(%s) 相似度 %.2f，请人工确认是否合并'
+                  % (p.get('name'), old.get('name'), old.get('id'), r))
+            break
+    return None
+
+
+def _upsert(data, incoming, key, gen_id, approx_match=None):
+    """按主键增量合并一批记录，返回 (新增数, 更新数)。
+
+    approx_match(data, it)：对无 id 的增量记录，尝试按近似名匹配已有记录返回其 id；
+    匹配不上返回 None，再由 gen_id 生成新 id。
+    """
     by_id = {it['id']: it for it in data[key]}
     today = _date()
     added = updated = 0
     for it in incoming:
         it = dict(it)
         iid = it.get('id')
+        if not iid and approx_match:
+            iid = approx_match(data, it)
         if not iid:
             iid = gen_id(data, it)
             it['id'] = iid
@@ -205,9 +237,11 @@ def _upsert(data, incoming, key, gen_id):
 
 def refresh(incoming):
     """合并一批增量数据，更新元信息，写回并重新导出。"""
+    _dedupe(incoming)   # 入库前先去重，防近似名重复
     data = load()
     pa, pu = _upsert(data, incoming.get('projects', []), 'projects',
-                     gen_id=lambda d, p: p.get('id') or _next_id(d, p))
+                     gen_id=lambda d, p: _next_id(d, p),
+                     approx_match=_match_existing_project)
     aa, au = _upsert(data, incoming.get('policies', []), 'policies',
                      gen_id=lambda d, p: 'pol-%03d' % (len(d['policies']) + 1))
     # 政策 id 用简单递增；若 incoming 已带 id 则沿用（见 _upsert）
@@ -288,7 +322,13 @@ def _parse_json_loose(c):
 
 
 def _norm_name(s):
-    return (s or '').replace(' ', '').replace('\u3000', '').lower()
+    """名称归一化：去空白、去括号及括号内补充说明（如"（一期）""(16万颗...)"）。
+
+    用于去重匹配——括号内通常是型号/期数等易变补充，去除后可把近似名归并为同一项目。
+    """
+    s = (s or '').replace(' ', '').replace('\u3000', '')
+    s = re.sub(r'[（(][^）)]*[）)]', '', s)
+    return s.lower()
 
 
 def _clean_num(v):
@@ -390,15 +430,31 @@ def _iter_years(start, end):
 
 
 def _dedupe(entries):
-    """按名称/标题去重：同名保留最后一次出现（时间靠后的状态通常更新）。"""
-    seen_p, seen_q = {}, {}
+    """按名称去重：项目做「同省 + 归一化名精确/近似」匹配，政策按标题精确匹配。
+
+    近似匹配（相似度>0.8）用于拦截模型对同一项目给出的近似名（如「智算中心/AI数据中心」），
+    避免重复入库；同省约束可防止跨省同名/近似名的真实项目被误合并。
+    """
     ps, qs = [], []
+    seen_p = []   # [(province, norm_name)] 与 ps 同序
+    seen_q = {}
     for p in entries['projects']:
         k = _norm_name(p.get('name'))
-        if k in seen_p:
-            ps[seen_p[k]] = p
+        prov = p.get('province')
+        idx = None
+        for i, (sp, sk) in enumerate(seen_p):
+            if sp == prov and sk == k:
+                idx = i
+                break
+        if idx is None:
+            for i, (sp, sk) in enumerate(seen_p):
+                if sp == prov and difflib.SequenceMatcher(None, k, sk).ratio() > 0.8:
+                    idx = i
+                    break
+        if idx is not None:
+            ps[idx] = p
         else:
-            seen_p[k] = len(ps)
+            seen_p.append((prov, k))
             ps.append(p)
     for q in entries['policies']:
         k = _norm_name(q.get('title'))

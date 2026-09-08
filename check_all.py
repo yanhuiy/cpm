@@ -3,13 +3,14 @@
 """一键体检：数据合规核查 + 前端 JS 语法检查。
 
 运行：python check_all.py
-  1. 数据合规：量纲互斥、id-类型一致性、vendor/province 合法性、坐标范围、重复项、政策字段。
+  1. 数据合规：量纲互斥、id 格式与唯一性、vendor/province 合法性、坐标范围、重复项、政策字段。
   2. 前端语法：data.js / china_geo.js / cities_geo.js / echarts.min.js / index.html 内联脚本。
 退出码：0=全部通过，1=存在问题。
 """
 
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -17,7 +18,6 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 
 # ==================== 1. 数据合规核查 ====================
 EXPECT_DIM = {'超算中心': 'hpcP', '智算中心': 'aiP', '运营商IDC': 'racks', '通用·云': 'racks'}
-TYPE_CODE = {'超算中心': 'hpc', '智算中心': 'aic', '运营商IDC': 'idc', '通用·云': 'clu'}
 VENDOR = set(['昇腾', 'NVIDIA', '寒武纪', '海光', '阿里', '百度', '混合', '其他'])
 
 
@@ -41,9 +41,9 @@ def check_data():
             e(iid, 'type=%s 但 vendor=%s 非空(仅智算可有)' % (typ, p['vendor']))
         if typ == '智算中心' and p.get('vendor') and p['vendor'] not in VENDOR:
             e(iid, 'vendor %s 非法' % p['vendor'])
-        # 3. id-类型一致性
-        if TYPE_CODE.get(typ) and iid and ('-%s-' % TYPE_CODE[typ]) not in iid:
-            e(iid, 'id前缀与type不一致(type=%s)' % typ)
+        # 3. id 格式（{adcode}-{三位序号}，不含 type）
+        if iid and not re.fullmatch(r'\d{6}-\d{3}', iid):
+            e(iid, 'id 格式非法(应为 {adcode}-{三位序号})')
         # 4. province 合法性
         if p.get('province') not in regions:
             e(iid, 'province %s 不在合法列表' % p['province'])
@@ -58,6 +58,15 @@ def check_data():
     for key, ids in names.items():
         if len(ids) > 1:
             e(' / '.join(ids), '疑似重复项: %s x%d' % (key, len(ids)))
+
+    # id 唯一性
+    seen_ids = {}
+    for p in data['projects']:
+        iid = p.get('id')
+        if iid in seen_ids:
+            e(iid, 'id 重复(%s / %s)' % (seen_ids[iid].get('name'), p.get('name')))
+        elif iid:
+            seen_ids[iid] = p
 
     for p in data['policies']:
         iid = p.get('id')
